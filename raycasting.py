@@ -5,11 +5,31 @@ from settings import *
 class Raycasting:
     def __init__ (self, catGame):
         self.catGame = catGame
+        self.ray_casting_result = []
+        self.objects_to_render = []
+        self.textures = self.catGame.object_renderer.wall_textures
+
+    def get_objects_to_render(self):
+        self.objects_to_render = []
+        for ray, values in enumerate(self.ray_casting_result):
+            depth, proj_height, texture, offset = values
+
+            wall_column = self.textures[texture].subsurface(
+                offset * (TEXTURE_SIZE - SCALE), 0, SCALE, TEXTURE_SIZE
+            )
+            wall_column = pygame.transform.scale(wall_column, (SCALE, proj_height))
+            wall_pos = (ray * SCALE, HALF_HEIGHT - proj_height // 2)
+
+            self.objects_to_render.append((depth, wall_column, wall_pos))
 
     def ray_cast(self):
+        self.ray_casting_result = []
         ox, oy = self.catGame.player.pos
         x_map, y_map = self.catGame.player.map_pos
         ray_angle = self.catGame.player.angle - HALF_FOV + 0.0001
+
+        # add this line to avoid errors!
+        texture_vert, texture_hor = 1,1
         
         for ray in range(NUM_RAYS):
             sin_a = math.sin(ray_angle)
@@ -27,6 +47,7 @@ class Raycasting:
             for i in range(MAX_DEPTH):
                 tile_hor = int(x_hor), int(y_hor)
                 if tile_hor in self.catGame.map.world_map:
+                    texture_hor = self.catGame.map.world_map[tile_hor]
                     break
                 x_hor += dx
                 y_hor += dy
@@ -44,15 +65,21 @@ class Raycasting:
             for i in range(MAX_DEPTH):
                 tile_vert = int(x_vert), int(y_vert)
                 if tile_vert in self.catGame.map.world_map:
+                    texture_vert = self.catGame.map.world_map[tile_vert]
                     break
                 x_vert += dx
                 y_vert += dy
                 depth_vert += delta_depth
-
+            
+            #depth, texture offset
             if depth_vert < depth_hor:
-                depth = depth_vert
+                depth, texture = depth_vert, texture_vert
+                y_vert %= 1
+                offset = y_vert if cos_a > 0 else (1 - y_vert)
             else:
-                depth = depth_hor
+                depth, texture = depth_hor, texture_hor
+                x_hor %= 1
+                offset = (1 - x_hor) if sin_a > 0 else x_hor
 
             #remove fishbowl effect
             depth *= math.cos(self.catGame.player.angle - ray_angle)
@@ -60,12 +87,11 @@ class Raycasting:
             #projection
             proj_height = SCREEN_DIST / (depth + 0.0001)
 
-            #draw walls
-            color = [255 / (1 + depth ** 5 * 0.000002)] * 3
-            pygame.draw.rect(self.catGame.screen, color,
-                             (ray * SCALE, HALF_HEIGHT - proj_height // 2, SCALE, proj_height))
+            # ray casting result
+            self.ray_casting_result.append((depth, proj_height, texture, offset))
             
             ray_angle += DELTA_ANGLE
 
     def update(self):
         self.ray_cast()
+        self.get_objects_to_render()
