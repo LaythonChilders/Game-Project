@@ -1,4 +1,4 @@
-import pygame
+import pygame as pygame
 import sys
 from settings import *
 from map import * 
