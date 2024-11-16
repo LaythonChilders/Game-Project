@@ -44,17 +44,19 @@ class Player:
         return (x, y) not in self.catGame.map.world_map
     
     def check_wall_collison(self, dx, dy):
-        if self.check_wall(int(self.x + dx), int(self.y)):
+        # value used to maintain resolution of wall textures 
+        SCALE = PLAYER_SIZE_SCALE / self.catGame.delta_time
+        if self.check_wall(int(self.x + dx * SCALE), int(self.y)):
             self.x += dx
-        if self.check_wall(int(self.x), int(self.y + dy)):
+        if self.check_wall(int(self.x), int(self.y + dy * SCALE)):
             self.y += dy
 
 
 
     def draw(self):
-        #pygame.draw.line(self.catGame.screen, 'yellow', (self.x * 100, self.y * 100),
-        #            (self.x * 100 + WIDTH * math.cos(self.angle),
-        #             self.y * 100 + WIDTH * math. sin(self.angle)), 2)
+        pygame.draw.line(self.catGame.screen, 'yellow', (self.x * 100, self.y * 100),
+                    (self.x * 100 + WIDTH * math.cos(self.angle),
+                     self.y * 100 + WIDTH * math. sin(self.angle)), 2)
         pygame.draw.circle(self.catGame.screen, 'green', (self.x * 100, self.y * 100), 15)
 
     def update(self):
