@@ -27,7 +27,7 @@ class CatDoom:
         self.raycasting.update()
         pygame.display.flip()
         self.delta_time = self.clock.tick(FPS)
-        pygame.display.set_caption(f' {self.clock.get_fps() : .1f}')
+        pygame.display.set_caption(f'{self.clock.get_fps() : .1f}')
 
     def draw(self):
        # self.screen.fill('black')
