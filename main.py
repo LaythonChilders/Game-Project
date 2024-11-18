@@ -11,6 +11,8 @@ class CatDoom:
         pygame.init()
         # not working????
         pygame.mouse.set_visible(False)
+        # fixes mouse not captured possibly
+        pygame.event.set_grab(True)
         self.screen = pygame.display.set_mode(RESOLUTION)
         self.clock = pygame.time.Clock()
         self.delta_time = 1
