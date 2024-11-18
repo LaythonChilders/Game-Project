@@ -7,13 +7,12 @@ from raycasting import *
 from object_renderer import *
 from sprite_object import *
 from object_handler import *
+from menu import *
 
 
 class CatDoom:
     def __init__(self):
         pygame.init()
-        # not working????
-        pygame.mouse.set_visible(False)
         # fixes mouse not captured possibly
         pygame.event.set_grab(True)
         self.screen = pygame.display.set_mode(RESOLUTION)
@@ -24,11 +23,14 @@ class CatDoom:
     def new_game(self):
         self.map = Map(self)
         self.player = Player(self)
-        self.object_renderer = ObjectRenderer(self)
-        self.raycasting = Raycasting(self)
         #self.static_sprite = SpriteObject(self)
         #self.animated_sprite = AnimatedSprite(self)
+        self.menu = Menu(self)
         self.object_handler = ObjectHandler(self)
+
+    def set_ObjectRenderer_Raycasting(self):
+        self.object_renderer = ObjectRenderer(self)
+        self.raycasting = Raycasting(self)
 
     def draw_frame(self): #called in loop to update/redraw each frame
         self.player.update()
@@ -53,6 +55,9 @@ class CatDoom:
                 pygame.quit()
                 sys.exit()
 
+    def mainMenu(self):
+        self.theme = self.menu.run()
+
     def main_loop(self):
         while True:
             self.check_exit()
@@ -61,4 +66,6 @@ class CatDoom:
 
 if __name__ == '__main__':
     catGame = CatDoom()
+    catGame.mainMenu()
+    catGame.set_ObjectRenderer_Raycasting()
     catGame.main_loop() 

@@ -5,6 +5,7 @@ class ObjectRenderer:
     def __init__(self, game):
         self.game = game
         self.screen = game.screen
+        self.theme = game.theme
         self.wall_textures = self.load_wall_textures()
         self.sky_image = self.get_texture('Resources/Textures/sky.png', (WIDTH, HALF_HEIGHT))
         self.sky_offset = 0
@@ -31,10 +32,19 @@ class ObjectRenderer:
         return pg.transform.scale(texture, res)
 
     def load_wall_textures(self):
-        return {
-            1: self.get_texture('Resources/Textures/stoneWall.png'),
-            2: self.get_texture('Resources/Textures/stoneWall.png'),
-            3: self.get_texture('Resources/Textures/stoneWall.png'),
-            4: self.get_texture('Resources/Textures/stoneWall.png'),
-            5: self.get_texture('Resources/Textures/stoneWall.png'),
-        }
+        if (self.theme == "Halloween"):
+            return {
+                1: self.get_texture('Resources/Textures/stoneWall.png'),
+                2: self.get_texture('Resources/Textures/stoneWall.png'),
+                3: self.get_texture('Resources/Textures/stoneWall.png'),
+                4: self.get_texture('Resources/Textures/stoneWall.png'),
+                5: self.get_texture('Resources/Textures/stoneWall.png'),
+            }
+        elif (self.theme == "Christmas"):
+            return {
+                1: self.get_texture('Resources/Textures/cobwebWall3.png'),
+                2: self.get_texture('Resources/Textures/cobwebWall3.png'),
+                3: self.get_texture('Resources/Textures/cobwebWall3.png'),
+                4: self.get_texture('Resources/Textures/cobwebWall3.png'),
+                5: self.get_texture('Resources/Textures/cobwebWall3.png'),
+            }
