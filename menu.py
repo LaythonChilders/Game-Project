@@ -20,7 +20,7 @@ class Menu:
                 "text": "Halloween Theme",
                 "rect": pygame.Rect(
                     HALF_WIDTH - button_width // 2,
-                    HALF_HEIGHT - button_height - button_margin // 2,
+                    HALF_HEIGHT - button_height - button_margin,
                     button_width,
                     button_height,
                 ),
@@ -30,11 +30,21 @@ class Menu:
                 "text": "Christmas Theme",
                 "rect": pygame.Rect(
                     HALF_WIDTH - button_width // 2,
-                    HALF_HEIGHT + button_margin // 2,
+                    HALF_HEIGHT,
                     button_width,
                     button_height,
                 ),
                 "action": lambda: self.set_theme("Christmas"),
+            },
+            {
+                "text": "Thanksgiving Theme",
+                "rect": pygame.Rect(
+                    HALF_WIDTH - button_width // 2,
+                    HALF_HEIGHT + button_height + button_margin,
+                    button_width,
+                    button_height,
+                ),
+                "action": lambda: self.set_theme("Thanksgiving"),
             },
         ]
 

@@ -48,3 +48,12 @@ class ObjectRenderer:
                 4: self.get_texture('Resources/Textures/christmaswall.png'),
                 5: self.get_texture('Resources/Textures/christmaswall.png'),
             }
+        elif (self.theme == "Thanksgiving"):
+            return {
+                1: self.get_texture('Resources/Textures/thanksgivingwall.png'),
+                2: self.get_texture('Resources/Textures/thanksgivingwall.png'),
+                3: self.get_texture('Resources/Textures/thanksgivingwall.png'),
+                4: self.get_texture('Resources/Textures/thanksgivingwall.png'),
+                5: self.get_texture('Resources/Textures/thanksgivingwall.png'),
+            }
+            
