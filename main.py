@@ -9,6 +9,7 @@ from sprite_object import *
 from object_handler import *
 from menu import *
 from weapon import *
+from sound import *
 
 
 class CatDoom:
@@ -28,6 +29,7 @@ class CatDoom:
         #self.animated_sprite = AnimatedSprite(self)
         self.menu = Menu(self)
         self.object_handler = ObjectHandler(self)
+        self.weapon = Weapon(self)
 
     def set_ObjectRenderer_Raycasting(self):
         self.object_renderer = ObjectRenderer(self)
@@ -37,6 +39,7 @@ class CatDoom:
         self.player.update()
         self.raycasting.update()
         self.object_handler.update()
+        self.weapon.update()
         #self.static_sprite.update()
         #self.animated_sprite.update()
         pygame.display.flip()
@@ -46,8 +49,16 @@ class CatDoom:
     def draw(self):
        # self.screen.fill('black')
         self.object_renderer.draw()
+        self.weapon.draw()
         #self.map.draw()
         #self.player.draw()
+
+    def check_events(self):
+        for event in pg.event.get():
+            if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
+                pg.quit()
+                sys.exit()
+            self.player.single_fire_event(event)
 
 
     def check_exit(self): # checks for events/keystrokes that signal user intent to exit
