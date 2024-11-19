@@ -11,7 +11,7 @@ from menu import *
 from weapon import *
 from sound import *
 
-
+# Factories and singleton TO IMPLEMENT
 class CatDoom:
     def __init__(self):
         pygame.init()
