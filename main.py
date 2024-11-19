@@ -22,6 +22,7 @@ class CatDoom:
         self.delta_time = 1
         self.new_game() 
 
+
     def new_game(self):
         self.map = Map(self)
         self.player = Player(self)
@@ -76,6 +77,7 @@ class CatDoom:
             self.check_exit()
             self.draw_frame()
             self.draw()
+            self.check_events()
 
 if __name__ == '__main__':
     catGame = CatDoom()
