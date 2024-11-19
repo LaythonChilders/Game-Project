@@ -30,6 +30,7 @@ class CatDoom:
         self.menu = Menu(self)
         self.object_handler = ObjectHandler(self)
         self.weapon = Weapon(self)
+        self.sound = Sound(self)
 
     def set_ObjectRenderer_Raycasting(self):
         self.object_renderer = ObjectRenderer(self)
@@ -58,6 +59,7 @@ class CatDoom:
             if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
                 pg.quit()
                 sys.exit()
+            self.player.single_fire_event(event)
             self.player.single_fire_event(event)
 
 
