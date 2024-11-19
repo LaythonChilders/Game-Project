@@ -5,4 +5,4 @@ class Sound:
         self.game = game
         pg.mixer.init()
         self.path = 'Resources/Sounds/'
-        self.shotgun = pg.mixer.Sound(self.path + 'bleah1.ogg')
+        self.minigun = pg.mixer.Sound(self.path + 'bleah1.wav')
