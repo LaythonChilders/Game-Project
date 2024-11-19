@@ -55,11 +55,10 @@ class CatDoom:
         #self.player.draw()
 
     def check_events(self):
-        for event in pg.event.get():
-            if event.type == pg.QUIT or (event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE):
-                pg.quit()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
+                pygame.quit()
                 sys.exit()
-            self.player.single_fire_event(event)
             self.player.single_fire_event(event)
 
 
