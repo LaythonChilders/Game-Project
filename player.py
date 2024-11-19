@@ -15,7 +15,7 @@ class Player:
         
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1 and not self.shot and not self.catGame.weapon.reloading:
-                self.catGame.sound.minigun.play()
+                self.catGame.sound.shotgun.play()
                 self.catGame.sound.reload.play()
                 self.shot = True
                 self.catGame.weapon.reloading = True
