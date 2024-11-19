@@ -76,5 +76,7 @@ class Menu:
             self.handle_events()
             self.draw_buttons()
             pygame.display.flip()
-            self.clock.tick(60)
+            self.clock.tick(FPS)
+            pygame.display.set_caption(f'{self.clock.get_fps() : .1f}')
+
         return self.selected_theme
