@@ -5,4 +5,5 @@ class Sound:
         self.game = game
         pg.mixer.init()
         self.path = 'Resources/Sounds/'
-        self.minigun = pg.mixer.Sound(self.path + 'bleah1.wav')
+        self.minigun = pg.mixer.Sound(self.path + 'bottle-pop.mp3')
+        self.reload = pg.mixer.Sound(self.path + 'gun-reload.mp3')
