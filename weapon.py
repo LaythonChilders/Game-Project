@@ -18,7 +18,6 @@ class Weapon(AnimatedSprite):
     def animate_shot(self):
         if self.reloading:
             self.game.player.shot = False
-            print(self.animation_trigger)
             if self.animation_trigger:
                 self.images.rotate(-1)
                 self.image = self.images[0]
