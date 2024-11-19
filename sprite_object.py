@@ -4,8 +4,7 @@ import os
 from collections import deque
 
 class SpriteObject:
-        def __init__(self, game, path='Resources/Sprites/Static_Sprites/pumpkin.png', 
-                     pos=(10.5, 3.5), scale=0.7, shift=0.27):
+        def __init__(self, game, path, pos=(10.5, 3.5), scale=0.7, shift=0.27):
                 self.game = game
                 self.player = game.player
                 self.x, self.y = pos
@@ -53,8 +52,7 @@ class SpriteObject:
                self.get_sprite()
 
 class AnimatedSprite(SpriteObject):
-        def __init__(self, game, path='Resources/Sprites/Animated_Sprites/Jack_Lantern/0.png', 
-                        pos=(11.5, 3.5), scale=0.8, shift=0.15, animation_time=120):
+        def __init__(self, game, path, pos=(11.5, 3.5), scale=0.8, shift=0.15, animation_time=120):
                 super().__init__(game, path, pos, scale, shift)
                 self.animation_time = animation_time
                 self.path = path.rsplit('/', 1) [0]

@@ -28,11 +28,11 @@ class CatDoom:
         #self.static_sprite = SpriteObject(self)
         #self.animated_sprite = AnimatedSprite(self)
         self.menu = Menu(self)
-        self.object_handler = ObjectHandler(self)
         self.weapon = Weapon(self)
         self.sound = Sound(self)
 
-    def set_ObjectRenderer_Raycasting(self):
+    def init_theme_dependent(self):
+        self.object_handler = ObjectHandler(self)
         self.object_renderer = ObjectRenderer(self)
         self.raycasting = Raycasting(self)
 
@@ -80,5 +80,5 @@ class CatDoom:
 if __name__ == '__main__':
     catGame = CatDoom()
     catGame.mainMenu()
-    catGame.set_ObjectRenderer_Raycasting()
+    catGame.init_theme_dependent()
     catGame.main_loop() 
