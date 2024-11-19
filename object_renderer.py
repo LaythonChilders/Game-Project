@@ -42,9 +42,9 @@ class ObjectRenderer:
             }
         elif (self.theme == "Christmas"):
             return {
-                1: self.get_texture('Resources/Textures/cobwebWall3.png'),
-                2: self.get_texture('Resources/Textures/cobwebWall3.png'),
-                3: self.get_texture('Resources/Textures/cobwebWall3.png'),
-                4: self.get_texture('Resources/Textures/cobwebWall3.png'),
-                5: self.get_texture('Resources/Textures/cobwebWall3.png'),
+                1: self.get_texture('Resources/Textures/christmaswall.png'),
+                2: self.get_texture('Resources/Textures/christmaswall.png'),
+                3: self.get_texture('Resources/Textures/christmaswall.png'),
+                4: self.get_texture('Resources/Textures/christmaswall.png'),
+                5: self.get_texture('Resources/Textures/christmaswall.png'),
             }
