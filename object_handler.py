@@ -9,18 +9,25 @@ class ObjectHandler():
         self.anim_sprite_path = 'Resources/Sprites/Animated_Sprites/'
         add_sprite = self.add_sprite
 
-        # sprite map
+        self.static_Paths = []
+        self.animated_Paths = []
+
         if (self.theme == "Halloween"):
-            add_sprite(SpriteObject(game, 'Resources/Sprites/Static_Sprites/pumpkin.png'))
-            add_sprite(AnimatedSprite(game, 'Resources/Sprites/Animated_Sprites/Jack_Lantern/0.png'))
-        
+            self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
+            self.animated_Paths.append('Resources/Sprites/Animated_Sprites/Jack_Lantern/0.png')
+
         elif (self.theme == "Christmas"):
-            add_sprite(SpriteObject(game, 'Resources/Sprites/Static_Sprites/pumpkin.png'))
-            add_sprite(AnimatedSprite(game, 'Resources/Sprites/Animated_Sprites/Jack_Lantern/0.png'))
-        
+            self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
+            self.animated_Paths.append('Resources/Sprites/Animated_Sprites/Jack_Lantern/0.png')
+
         elif (self.theme == "Thanksgiving"):
-            add_sprite(SpriteObject(game, 'Resources/Sprites/Static_Sprites/pumpkin.png'))
-            add_sprite(AnimatedSprite(game, 'Resources/Sprites/Animated_Sprites/Turkey/0.png'))
+            self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
+            self.animated_Paths.append('Resources/Sprites/Animated_Sprites/Turkey/0.png')
+
+
+        # sprite map
+        add_sprite(SpriteObject(game, self.static_Paths[0]))
+        add_sprite(AnimatedSprite(game, self.animated_Paths[0]))
 
 
     def update(self):
