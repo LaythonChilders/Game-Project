@@ -4,8 +4,6 @@ from sprite_object import *
 class Weapon(AnimatedSprite):
     def __init__(self, game, path='Resources/Sprites/Weapon/Shotgun/0.png', scale=0.4, animation_time=90):
         super().__init__(game=game, path=path, scale=scale, animation_time=animation_time)
-        # Fix for starting weapon frame
-        self.images.rotate(4)
         self.images = deque(
             [pg.transform.smoothscale(img, (self.image.get_width() * scale, self.image.get_height() * scale))
              for img in self.images])
