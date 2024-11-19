@@ -3,7 +3,7 @@ from sprite_object import *
 # Inherits from AnimatedSprite class while specificying only the path, scale, and time
 # of the animation
 class Weapon(AnimatedSprite):
-    def __init__(self, game, path='Resources/Sprites/Weapon/Minigun/minigun.png', scale=0.7, animation_time=90):
+    def __init__(self, game, path='Resources/Sprites/Weapon/Shotgun/0.png', scale=0.4, animation_time=90):
         super().__init__(game=game, path=path, scale=scale, animation_time=animation_time)
         self.images = deque(
             [pg.transform.smoothscale(img, (self.image.get_width() * scale, self.image.get_height() * scale))
@@ -31,5 +31,3 @@ class Weapon(AnimatedSprite):
     def update(self):
         self.check_animation_time()
         self.animate_shot()
-
-
