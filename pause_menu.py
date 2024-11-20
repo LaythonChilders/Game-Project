@@ -83,7 +83,7 @@ class pause_menu:
         button_size = 50
         spacing = 10
         start_x = (WIDTH - (button_size + spacing) * 13) // 2
-        start_y = HEIGHT - 150
+        start_y = HEIGHT - 180
         enter_x = WIDTH // 2 - button_size
         enter_y = start_y + 2 * (button_size + spacing)
 
