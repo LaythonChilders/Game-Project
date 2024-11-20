@@ -8,6 +8,7 @@ from object_renderer import *
 from sprite_object import *
 from object_handler import *
 from menu import *
+from pause_menu import *
 from weapon import *
 from sound import *
 from pathfinding import *
@@ -33,9 +34,11 @@ class CatDoom:
         #self.static_sprite = SpriteObject(self)
         #self.animated_sprite = AnimatedSprite(self)
         self.menu = Menu(self)
+        self.pause_menu = pause_menu(self)
         self.weapon = Weapon(self)
         self.sound = Sound(self)
         self.pathfinding = PathFinding(self)
+        self.running = True
 
     def init_theme_dependent(self):
         self.object_handler = ObjectHandler(self)
@@ -63,11 +66,16 @@ class CatDoom:
     def check_events(self):
         self.global_trigger = False
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
+            if event.type == pygame.QUIT: #Check for user intent to exit outside of pause menu
                 pygame.quit()
                 sys.exit()
             elif event.type == self.global_event:
                 self.global_trigger = True
+
+            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): #if user presses escape show to pause menu
+                self.pause_menu.running = True
+                self.pause_menu.run()
+
             self.player.single_fire_event(event)
 
 
@@ -81,14 +89,20 @@ class CatDoom:
         self.theme = self.menu.run()
 
     def main_loop(self):
-        while True:
+        while self.running:
             self.check_exit()
             self.draw_frame()
             self.draw()
             self.check_events()
 
+        self.setup_game()
+
+    def setup_game(self):
+        self.new_game()
+        self.mainMenu()
+        self.init_theme_dependent()
+        self.main_loop() 
+
 if __name__ == '__main__':
     catGame = CatDoom()
-    catGame.mainMenu()
-    catGame.init_theme_dependent()
-    catGame.main_loop() 
+    catGame.setup_game()
