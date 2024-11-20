@@ -86,8 +86,9 @@ class Player:
 
     def mouse_control(self):
         mx, my = pygame.mouse.get_pos()
-        if mx < MOUSE_BORDER_LEFT or mx > MOUSE_BORDER_RIGHT:
-            pygame.mouse.set_pos([HALF_WIDTH, HALF_HEIGHT])
+        #if mx < MOUSE_BORDER_LEFT or mx > MOUSE_BORDER_RIGHT:
+        pygame.mouse.set_pos([HALF_WIDTH, HALF_HEIGHT])
+        
         self.rel = pygame.mouse.get_rel()[0]
         self.rel = max(-MOUSE_MAX_REL, min(MOUSE_MAX_REL, self.rel))
         self.angle += self.rel * MOUSE_SENSITIVITY * self.catGame.delta_time

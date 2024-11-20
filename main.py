@@ -17,7 +17,6 @@ from pathfinding import *
 class CatDoom:
     def __init__(self):
         pygame.init()
-        # fixes mouse not captured possibly
         pygame.event.set_grab(True)
         self.screen = pygame.display.set_mode(RESOLUTION)
         self.clock = pygame.time.Clock()
@@ -74,7 +73,9 @@ class CatDoom:
 
             elif (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): #if user presses escape show to pause menu
                 self.pause_menu.running = True
+                pygame.mouse.set_visible(True)
                 self.pause_menu.run()
+                pygame.mouse.set_visible(False)
 
             self.player.single_fire_event(event)
 
@@ -86,7 +87,9 @@ class CatDoom:
                 sys.exit()
 
     def mainMenu(self):
+        pygame.mouse.set_visible(True)
         self.theme = self.menu.run()
+        pygame.mouse.set_visible(False)
 
     def main_loop(self):
         while self.running:
