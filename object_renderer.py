@@ -158,3 +158,45 @@ class ObjectRenderer:
             score_x = initials_x + len(score_entry["initials"]) * self.scoreboard_letter_size + self.scoreboard_letter_size
             for i, char in enumerate(score_str):
                 self.screen.blit(self.scoreboard_digits[char], (score_x + i * self.scoreboard_digit_size, y))
+
+    def draw_scoreboard_enter_data(self, initials="ZZZ", highlight_index=None):
+        max_initials = 3
+        button_size = 50
+        spacing = 10
+        start_x = (WIDTH - (button_size + spacing) * 13) // 2
+        start_y = HEIGHT - 180
+
+        initials_area_height = button_size + spacing + 10  
+        initials_area_rect = pg.Rect(0, start_y - initials_area_height, WIDTH, initials_area_height)
+        pg.draw.rect(self.screen, (0, 0, 0), initials_area_rect)
+
+        
+        for i, char in enumerate(string.ascii_uppercase):
+            col = i % 13
+            row = i // 13
+            x = start_x + col * (button_size + spacing)
+            y = start_y + row * (button_size + spacing)
+
+            color = (255, 255, 255) 
+            if highlight_index is not None and i == highlight_index:
+                color = (255, 0, 0) 
+
+            pg.draw.rect(self.screen, color, (x, y, button_size, button_size), border_radius=5)
+
+            letter_image = self.get_texture(f'Resources/Textures/Letters/{char}.png', (button_size, button_size))
+            self.screen.blit(letter_image, (x, y))
+
+        initials_x = WIDTH // 2 - (button_size + spacing) * len(initials) // 2
+        initials_y = start_y - button_size - spacing
+        for i, char in enumerate(initials):
+            letter_image = self.get_texture(f'Resources/Textures/Letters/{char}.png', (button_size, button_size))
+            self.screen.blit(letter_image, (initials_x + i * (button_size + spacing), initials_y))
+
+        enter_x = WIDTH // 2 - button_size
+        enter_y = start_y + 2 * (button_size + spacing)
+        button_color = (0, 255, 0) if len(initials) == max_initials else (100, 100, 100)
+        pg.draw.rect(self.screen, button_color, (enter_x, enter_y, button_size * 2, button_size), border_radius=5)
+
+        font = pg.font.Font(None, 36)
+        enter_text = font.render("Enter", True, (0, 0, 0))
+        self.screen.blit(enter_text, (enter_x + 15, enter_y + 10))
