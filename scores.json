@@ -1,42 +1,42 @@
 [
     {
         "initials": "LTC",
-        "score": 150
-    },
-    {
-        "initials": "LTC",
-        "score": 20
+        "score": 150000
     },
     {
         "initials": "AAC",
-        "score": 10
-    },
-    {
-        "initials": "LTC",
-        "score": 10
+        "score": 100
     },
     {
         "initials": "AAE",
-        "score": 9
+        "score": 101
     },
     {
         "initials": "AAF",
-        "score": 8
+        "score": 102
     },
     {
         "initials": "AAR",
-        "score": 7
+        "score": 103
     },
     {
         "initials": "AAZ",
-        "score": 6
+        "score": 104
     },
     {
         "initials": "AAH",
-        "score": 5
+        "score": 105
     },
     {
         "initials": "AAL",
-        "score": 4
+        "score": 106
+    },
+    {
+        "initials": "AAT",
+        "score": 107
+    },
+    {
+        "initials": "LTC",
+        "score": 108
     }
 ]

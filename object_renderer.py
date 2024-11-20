@@ -32,12 +32,12 @@ class ObjectRenderer:
         self.letters = dict(zip(keys, self.letter_images))
         
         ##dict for scoreboard
-        self.scoreboard_digit_size= 30
+        self.scoreboard_digit_size= 35
         self.scoreboard_digit_images = [self.get_texture(f'Resources/Textures/Digits/{i}.png', [self.scoreboard_digit_size] * 2)
                              for i in range(11)]
         self.scoreboard_digits = dict(zip(map(str, range(11)), self.scoreboard_digit_images))
         
-        self.scoreboard_letter_size= 30
+        self.scoreboard_letter_size= 35
         self.scoreboard_letter_images = [self.get_texture(f'Resources/Textures/Letters/{char}.png', [self.scoreboard_letter_size] * 2)
                       for char in string.ascii_uppercase]
         self.scoreboard_letter_images.append(self.get_texture(f'Resources/Textures/Letters/colon.png', [self.scoreboard_letter_size] * 2))
@@ -128,7 +128,7 @@ class ObjectRenderer:
     def draw_scoreboard(self):
         scores = self.player.scoreboard.get_scores()
 
-        start_x = HALF_WIDTH - 300 
+        start_x = HALF_WIDTH - 500 
         start_y = HEIGHT // 3 * 2
         row_height = self.scoreboard_letter_size + 20  #
         column_offset = WIDTH // 2
@@ -141,6 +141,8 @@ class ObjectRenderer:
             x = start_x + column * column_offset
             y = start_y + row * row_height
 
+            if index == 9:
+                x -= self.scoreboard_digit_size 
            
             rank = str(index + 1)
             for i, char in enumerate(rank):
@@ -156,5 +158,3 @@ class ObjectRenderer:
             score_x = initials_x + len(score_entry["initials"]) * self.scoreboard_letter_size + self.scoreboard_letter_size
             for i, char in enumerate(score_str):
                 self.screen.blit(self.scoreboard_digits[char], (score_x + i * self.scoreboard_digit_size, y))
-
-                
