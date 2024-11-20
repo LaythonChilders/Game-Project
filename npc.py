@@ -2,7 +2,7 @@ from sprite_object import *
 from random import randint, random, choice
 
 class NPC(AnimatedSprite):
-    def __init__(self, game, path='Resources/Sprites/NPC/Turkey/0.png', pos=(10.5, 5.5),
+    def __init__(self, game, path='Resources/Sprites/NPC/Zombie/0.png', pos=(10.5, 5.5),
                 scale=0.6, shift=0.3, animation_time=180, value=10):
         super().__init__(game, path, pos, scale, shift, animation_time)
         # Supposed to fix slime position here
@@ -193,3 +193,18 @@ class NPC(AnimatedSprite):
         if self.ray_cast_player_npc():
             pg.draw.line(self.game.screen, 'orange', (100 * self.game.player.x, 100 * self.game.player.y),
                          (100 * self.x, 100 * self.y), 2)
+
+class ZombieNPC(NPC):
+    def __init__(self, game, path='Resources/Sprites/NPC/Zombie/0.png', pos=(10.5, 5.5),
+                scale=0.6, shift=0.38, animation_time=180):
+        super().__init__(game, path, pos, scale, shift, animation_time)
+
+class TurkeyNPC(NPC):
+    def __init__(self, game, path='Resources/Sprites/NPC/Turkey/0.png', pos=(10.5, 5.5),
+                scale=0.6, shift=0.38, animation_time=180):
+        super().__init__(game, path, pos, scale, shift, animation_time)
+
+class SlimeNPC(NPC):
+    def __init__(self, game, path='Resources/Sprites/NPC/Slime/0.png', pos=(10.5, 5.5),
+                scale=0.6, shift=0.38, animation_time=180):
+        super().__init__(game, path, pos, scale, shift, animation_time)

@@ -15,37 +15,51 @@ class ObjectHandler():
 
         self.static_Paths = []
         self.animated_Paths = []
-        self.npc_Paths = []
 
         if (self.theme == "Halloween"):
             self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
             self.animated_Paths.append('Resources/Sprites/Animated_Sprites/Jack_Lantern/0.png')
-            self.npc_Paths.append('Resources/Sprites/NPC/Zombie/0.png')
+            # spawn enemies
+            add_npc(ZombieNPC(game, pos=(11.0, 19.0)))
+            add_npc(ZombieNPC(game, pos=(11.5, 4.5)))
+            add_npc(ZombieNPC(game, pos=(13.5, 6.5)))
+            add_npc(ZombieNPC(game, pos=(2.0, 20.0)))
+            add_npc(ZombieNPC(game, pos=(4.0, 29.0)))
+            add_npc(ZombieNPC(game, pos=(5.5, 14.5)))
+            add_npc(ZombieNPC(game, pos=(5.5, 16.5)))
+            add_npc(ZombieNPC(game, pos=(14.5, 25.5)))
 
         elif (self.theme == "Christmas"):
             self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
             self.animated_Paths.append('Resources/Sprites/Animated_Sprites/Jack_Lantern/0.png')
-            self.npc_Paths.append('Resources/Sprites/NPC/Slime/0.png')
-
+            # spawn enemies
+            add_npc(SlimeNPC(game, pos=(11.0, 19.0)))
+            add_npc(SlimeNPC(game, pos=(11.5, 4.5)))
+            add_npc(SlimeNPC(game, pos=(13.5, 6.5)))
+            add_npc(SlimeNPC(game, pos=(2.0, 20.0)))
+            add_npc(SlimeNPC(game, pos=(4.0, 29.0)))
+            add_npc(SlimeNPC(game, pos=(5.5, 14.5)))
+            add_npc(SlimeNPC(game, pos=(5.5, 16.5)))
+            add_npc(SlimeNPC(game, pos=(14.5, 25.5)))
 
         elif (self.theme == "Thanksgiving"):
             self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
             #self.animated_Paths.append('Resources/Sprites/Animated_Sprites/Turkey/0.png')
-            self.npc_Paths.append('Resources/Sprites/NPC/Turkey/0.png')
+            add_npc(TurkeyNPC(game, pos=(11.0, 19.0)))
+            add_npc(TurkeyNPC(game, pos=(11.5, 4.5)))
+            add_npc(TurkeyNPC(game, pos=(13.5, 6.5)))
+            add_npc(TurkeyNPC(game, pos=(2.0, 20.0)))
+            add_npc(TurkeyNPC(game, pos=(4.0, 29.0)))
+            add_npc(TurkeyNPC(game, pos=(5.5, 14.5)))
+            add_npc(TurkeyNPC(game, pos=(5.5, 16.5)))
+            add_npc(TurkeyNPC(game, pos=(14.5, 25.5)))
+
 
 
         self.npc_positions = {}
         # sprite map
         add_sprite(SpriteObject(game, self.static_Paths[0]))
         #add_sprite(AnimatedSprite(game, self.animated_Paths[0]))
-
-        # NPC map
-        #add_npc(NPC(game))
-        #add_npc(NPC(game, self.npc_Paths[0]))
-        add_npc(NPC(game, self.npc_Paths[0]))
-        add_npc(NPC(game, self.npc_Paths[0]))
-
-        #(NPC(game, value=150))
  
 
     def update(self):
