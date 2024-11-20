@@ -20,7 +20,12 @@ class Player:
             pygame.display.flip()
             pygame.time.delay(1500)
             
-            self.scoreboard.add_score("LTC", self.score)
+            self.catGame.pause_menu.running = True
+            pygame.mouse.set_visible(True)
+            self.catGame.pause_menu.death()
+            pygame.mouse.set_visible(False)
+
+            #self.scoreboard.add_score("LTC", self.score)
             print(self.scoreboard.get_scores())
             
             self.catGame.restart_level()

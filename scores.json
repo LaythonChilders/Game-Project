@@ -4,39 +4,39 @@
         "score": 150000
     },
     {
-        "initials": "AAC",
-        "score": 100
-    },
-    {
-        "initials": "AAE",
-        "score": 101
-    },
-    {
-        "initials": "AAF",
-        "score": 102
-    },
-    {
-        "initials": "AAR",
-        "score": 103
-    },
-    {
-        "initials": "AAZ",
-        "score": 104
-    },
-    {
-        "initials": "AAH",
-        "score": 105
-    },
-    {
-        "initials": "AAL",
-        "score": 106
+        "initials": "LTC",
+        "score": 108
     },
     {
         "initials": "AAT",
         "score": 107
     },
     {
-        "initials": "LTC",
-        "score": 108
+        "initials": "AAL",
+        "score": 106
+    },
+    {
+        "initials": "AAH",
+        "score": 105
+    },
+    {
+        "initials": "AAZ",
+        "score": 104
+    },
+    {
+        "initials": "AAR",
+        "score": 103
+    },
+    {
+        "initials": "AAF",
+        "score": 102
+    },
+    {
+        "initials": "AAE",
+        "score": 101
+    },
+    {
+        "initials": "AAC",
+        "score": 100
     }
 ]
