@@ -8,6 +8,7 @@ from object_renderer import *
 from sprite_object import *
 from object_handler import *
 from menu import *
+from pause_menu import *
 from weapon import *
 from sound import *
 
@@ -29,6 +30,7 @@ class CatDoom:
         #self.static_sprite = SpriteObject(self)
         #self.animated_sprite = AnimatedSprite(self)
         self.menu = Menu(self)
+        self.pause_menu = pause_menu(self)
         self.weapon = Weapon(self)
         self.sound = Sound(self)
 
@@ -57,14 +59,14 @@ class CatDoom:
 
     def check_events(self):
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.QUIT: #Check for user intent to exit outside of pause menu
                 pygame.quit()
                 sys.exit()
-            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
-                while True:
-                    for event in pygame.event.get():
-                        if (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
-                            return
+
+            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): #if user presses escape show to pause menu
+                self.pause_menu.running = True
+                self.pause_menu.run()
+
             self.player.single_fire_event(event)
 
 
