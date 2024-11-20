@@ -35,6 +35,8 @@ class ObjectHandler():
 
         # NPC map
         add_npc(NPC(game))
+        add_npc(NPC(game, value=150))
+ 
 
     def update(self):
         self.npc_positions = {npc.map_pos for npc in self.npc_list if npc.alive}

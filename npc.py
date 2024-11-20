@@ -3,7 +3,7 @@ from random import randint, random, choice
 
 class NPC(AnimatedSprite):
     def __init__(self, game, path='Resources/Sprites/NPC/Turkey/0.png', pos=(10.5, 5.5),
-                scale=0.6, shift=0.3, animation_time=180):
+                scale=0.6, shift=0.3, animation_time=180, value=10):
         super().__init__(game, path, pos, scale, shift, animation_time)
         self.attack_images = self.get_images(self.path + '/Attack')
         self.death_images = self.get_images(self.path + '/Death')
@@ -22,6 +22,7 @@ class NPC(AnimatedSprite):
         self.ray_cast_value = False
         self.frame_counter = 0
         self.player_search_trigger = False
+        self.value = value
 
     def update(self):
         self.check_animation_time()
@@ -81,6 +82,7 @@ class NPC(AnimatedSprite):
         if self.health < 1:
             self.alive = False
             self.game.sound.npc_death.play()
+            self.game.player.score += self.value
 
     def run_logic(self):
         if self.alive == True:

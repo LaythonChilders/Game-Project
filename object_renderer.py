@@ -1,3 +1,4 @@
+import string
 import pygame as pg
 from settings import *
 
@@ -19,12 +20,20 @@ class ObjectRenderer:
         self.digit_images = [self.get_texture(f'Resources/Textures/Digits/{i}.png', [self.digit_size] * 2)
                              for i in range(11)]
         self.digits = dict(zip(map(str, range(11)), self.digit_images))
+
         self.game_over_image = self.get_texture('Resources/Textures/game_over.png', RESOLUTION)
+
+        self.letter_size= 60
+        self.letter_images = [self.get_texture(f'Resources/Textures/Letters/{char}.png', [self.letter_size] * 2)
+                      for char in string.ascii_uppercase + "colon"]
+        keys = list(string.ascii_uppercase) + [":"]  # A-Z + :
+        self.letters = dict(zip(keys, self.letter_images))
 
     def draw(self):
         self.draw_background()
         self.render_game_objects()
         self.draw_player_health()
+        self.draw_player_score()
 
     def game_over(self):
         self.screen.blit(self.game_over_image, (0,0))
@@ -34,6 +43,25 @@ class ObjectRenderer:
         for i, char in enumerate(health):
             self.screen.blit(self.digits[char], (i * self.digit_size, 0))
         self.screen.blit(self.digits['10'], ((i +1) * self.digit_size, 0))
+
+    def draw_player_score(self):
+        score = str(self.game.player.score)
+        text_width = self.letter_size * 6
+        total_score_width = text_width + len(score) * self.digit_size
+        start_x = WIDTH - total_score_width
+
+        
+        self.screen.blit(self.letters['S'], (start_x + 0 * self.letter_size, 0))  # S
+        self.screen.blit(self.letters['C'],  (start_x + 1 * self.letter_size, 0))  # C
+        self.screen.blit(self.letters['O'], (start_x + 2 * self.letter_size, 0))  # O
+        self.screen.blit(self.letters['R'], (start_x + 3 * self.letter_size, 0))  # R
+        self.screen.blit(self.letters['E'],  (start_x + 4 * self.letter_size, 0))  # E
+        self.screen.blit(self.letters[':'], (start_x + 5 * self.letter_size, 0))  # :
+
+        digit_start_x = start_x + text_width  
+        for i, char in enumerate(score):
+            self.screen.blit(self.digits[char], (digit_start_x + i * self.digit_size, 0))
+
 
     def player_damage(self):
         self.screen.blit(self.blood_screen, (0, 0))
