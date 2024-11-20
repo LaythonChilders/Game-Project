@@ -10,6 +10,7 @@ from object_handler import *
 from menu import *
 from weapon import *
 from sound import *
+from pathfinding import *
 
 # Factories and singleton TO IMPLEMENT
 class CatDoom:
@@ -20,6 +21,9 @@ class CatDoom:
         self.screen = pygame.display.set_mode(RESOLUTION)
         self.clock = pygame.time.Clock()
         self.delta_time = 1
+        self.global_trigger = False
+        self.global_event = pygame.USEREVENT + 0
+        pygame.time.set_timer(self.global_event, 40)
         self.new_game() 
 
 
@@ -31,6 +35,7 @@ class CatDoom:
         self.menu = Menu(self)
         self.weapon = Weapon(self)
         self.sound = Sound(self)
+        self.pathfinding = PathFinding(self)
 
     def init_theme_dependent(self):
         self.object_handler = ObjectHandler(self)
@@ -56,10 +61,13 @@ class CatDoom:
         #self.player.draw()
 
     def check_events(self):
+        self.global_trigger = False
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 pygame.quit()
                 sys.exit()
+            elif event.type == self.global_event:
+                self.global_trigger = True
             self.player.single_fire_event(event)
 
 

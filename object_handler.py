@@ -28,7 +28,7 @@ class ObjectHandler():
             self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
             self.animated_Paths.append('Resources/Sprites/Animated_Sprites/Turkey/0.png')
 
-
+        self.npc_positions = {}
         # sprite map
         add_sprite(SpriteObject(game, self.static_Paths[0]))
         add_sprite(AnimatedSprite(game, self.animated_Paths[0]))
@@ -37,6 +37,7 @@ class ObjectHandler():
         add_npc(NPC(game))
 
     def update(self):
+        self.npc_positions = {npc.map_pos for npc in self.npc_list if npc.alive}
         [sprite.update() for sprite in self.sprite_list]
         [npc.update() for npc in self.npc_list]
 

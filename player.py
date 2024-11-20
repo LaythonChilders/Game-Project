@@ -9,6 +9,20 @@ class Player:
         self.x, self.y = PLAYER_POS
         self.angle = PLAYER_ANGLE
         self.shot = False
+        self.health = PLAYER_MAX_HEALTH
+
+    def check_game_over(self):
+        if self.health < 1:
+            self.catGame.object_renderer.game_over()
+            pygame.display.flip()
+            pygame.time.delay(1500)
+            self.catGame.new_game()
+
+    def get_damage(self, damage):
+        self.health -= damage
+        self.catGame.object_renderer.player_damage()
+        self.catGame.sound.player_pain.play()
+        self.check_game_over()
 
     def single_fire_event(self, event):
                         
