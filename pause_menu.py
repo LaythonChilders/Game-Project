@@ -23,7 +23,7 @@ class pause_menu:
                     button_width,
                     button_height,
                 ),
-                "action": lambda: self.exit_game(),
+                "action": lambda: self.exit_to_menu(),
             },
             {
                 "text": "Exit",
@@ -36,6 +36,10 @@ class pause_menu:
                 "action": lambda: self.exit_game(),
             },
         ]
+
+    def exit_to_menu(self):
+        self.game.running = False
+        self.running = False
 
     def exit_game(self):
         pygame.quit()

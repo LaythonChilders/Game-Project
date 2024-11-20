@@ -33,6 +33,7 @@ class CatDoom:
         self.pause_menu = pause_menu(self)
         self.weapon = Weapon(self)
         self.sound = Sound(self)
+        self.running = True
 
     def init_theme_dependent(self):
         self.object_handler = ObjectHandler(self)
@@ -80,14 +81,20 @@ class CatDoom:
         self.theme = self.menu.run()
 
     def main_loop(self):
-        while True:
+        while self.running:
             self.check_exit()
             self.draw_frame()
             self.draw()
             self.check_events()
 
+        self.setup_game()
+
+    def setup_game(self):
+        self.new_game()
+        self.mainMenu()
+        self.init_theme_dependent()
+        self.main_loop() 
+
 if __name__ == '__main__':
     catGame = CatDoom()
-    catGame.mainMenu()
-    catGame.init_theme_dependent()
-    catGame.main_loop() 
+    catGame.setup_game()
