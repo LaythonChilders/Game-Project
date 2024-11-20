@@ -105,6 +105,7 @@ class CatDoom:
         self.main_loop()
 
     def restart_level(self):
+        pygame.mouse.set_visible(False)
         self.new_game()
         self.init_theme_dependent()
         self.main_loop()
