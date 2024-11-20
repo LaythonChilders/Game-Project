@@ -9,7 +9,6 @@ class pause_menu:
         self.clock = game.clock
         self.font = pygame.font.Font(None, 50)  # Default font with size 50
         self.running = True
-        self.selected_theme = None  # Stores the selected theme as a string
 
         button_width = 400
         button_height = 50
@@ -38,7 +37,7 @@ class pause_menu:
             },
         ]
 
-    def exit_game(self, theme):
+    def exit_game(self):
         pygame.quit()
         sys.exit()
 
