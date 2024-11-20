@@ -26,20 +26,36 @@ class pause_menu:
                 "action": lambda: self.exit_to_menu(),
             },
             {
-                "text": "Exit",
+                "text": "Restart level",
                 "rect": pygame.Rect(
                     HALF_WIDTH - button_width // 2,
                     HALF_HEIGHT,
                     button_width,
                     button_height,
                 ),
+                "action": lambda: self.restart_level(),
+            },
+            {
+                "text": "Exit",
+                "rect": pygame.Rect(
+                    HALF_WIDTH - button_width // 2,
+                    HALF_HEIGHT + button_height + button_margin,
+                    button_width,
+                    button_height,
+                ),
                 "action": lambda: self.exit_game(),
             },
         ]
+    
+    def restart_level(self):
+        self.game.running = False
+        self.running = False
+        self.game.restart_level()
 
     def exit_to_menu(self):
         self.game.running = False
         self.running = False
+        self.game.setup_game()
 
     def exit_game(self):
         pygame.quit()

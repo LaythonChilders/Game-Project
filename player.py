@@ -16,7 +16,7 @@ class Player:
             self.catGame.object_renderer.game_over()
             pygame.display.flip()
             pygame.time.delay(1500)
-            self.catGame.new_game()
+            self.catGame.restart_level()
 
     def get_damage(self, damage):
         self.health -= damage
@@ -88,7 +88,7 @@ class Player:
         mx, my = pygame.mouse.get_pos()
         #if mx < MOUSE_BORDER_LEFT or mx > MOUSE_BORDER_RIGHT:
         pygame.mouse.set_pos([HALF_WIDTH, HALF_HEIGHT])
-        
+
         self.rel = pygame.mouse.get_rel()[0]
         self.rel = max(-MOUSE_MAX_REL, min(MOUSE_MAX_REL, self.rel))
         self.angle += self.rel * MOUSE_SENSITIVITY * self.catGame.delta_time

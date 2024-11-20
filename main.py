@@ -71,7 +71,7 @@ class CatDoom:
             elif event.type == self.global_event:
                 self.global_trigger = True
 
-            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): #if user presses escape show to pause menu
+            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): #if user presses escape show pause menu
                 self.pause_menu.running = True
                 pygame.mouse.set_visible(True)
                 self.pause_menu.run()
@@ -97,14 +97,18 @@ class CatDoom:
             self.draw_frame()
             self.draw()
             self.check_events()
-
-        self.setup_game()
-
+            
     def setup_game(self):
         self.new_game()
         self.mainMenu()
         self.init_theme_dependent()
-        self.main_loop() 
+        self.main_loop()
+
+    def restart_level(self):
+        self.new_game()
+        self.init_theme_dependent()
+        self.main_loop()
+
 
 if __name__ == '__main__':
     catGame = CatDoom()
