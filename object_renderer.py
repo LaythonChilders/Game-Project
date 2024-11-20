@@ -25,7 +25,8 @@ class ObjectRenderer:
 
         self.letter_size= 60
         self.letter_images = [self.get_texture(f'Resources/Textures/Letters/{char}.png', [self.letter_size] * 2)
-                      for char in string.ascii_uppercase + "colon"]
+                      for char in string.ascii_uppercase]
+        self.letter_images.append(self.get_texture(f'Resources/Textures/Letters/colon.png', [self.letter_size] * 2))
         keys = list(string.ascii_uppercase) + [":"]  # A-Z + :
         self.letters = dict(zip(keys, self.letter_images))
 
