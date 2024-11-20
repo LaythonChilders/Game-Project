@@ -80,9 +80,6 @@ class pause_menu:
                             button["action"]()
 
     def handle_death_events(self, initials, max_initials):
-        """
-        Handles events for the death screen, allowing the user to input initials.
-        """
         button_size = 50
         spacing = 10
         start_x = (WIDTH - (button_size + spacing) * 13) // 2
@@ -91,10 +88,9 @@ class pause_menu:
         enter_y = start_y + 2 * (button_size + spacing)
 
         for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # Left mouse button
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: 
                 mouse_pos = event.pos
 
-                # Check if a letter button is clicked
                 for i, char in enumerate(string.ascii_uppercase):
                     col = i % 13
                     row = i // 13
@@ -105,16 +101,18 @@ class pause_menu:
                         initials.append(char)
                         break
 
-                # Check if the "Enter" button is clicked
                 enter_rect = pygame.Rect(enter_x, enter_y, button_size * 2, button_size)
                 if enter_rect.collidepoint(mouse_pos) and len(initials) == max_initials:
                     self.game.player.scoreboard.add_score("".join(initials), self.game.player.score)
                     self.game.player.scoreboard.save_scores()
-                    self.running = False  # Exit the death screen loop
+                    self.running = False
 
             elif event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
+            elif (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
+                self.running = False
 
     def run(self):
         while self.running:
