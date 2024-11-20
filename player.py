@@ -1,6 +1,7 @@
 from settings import *
 import pygame as pygame
 import math
+from scoreboard import *
 
 
 class Player:
@@ -11,13 +12,20 @@ class Player:
         self.shot = False
         self.health = PLAYER_MAX_HEALTH
         self.score = 0
+        self.scoreboard = Scoreboard(self)
 
     def check_game_over(self):
         if self.health < 1:
             self.catGame.object_renderer.game_over()
             pygame.display.flip()
             pygame.time.delay(1500)
+            
+            self.scoreboard.add_score("LTC", self.score)
+            print(self.scoreboard.get_scores())
+            
             self.catGame.restart_level()
+
+
 
     def get_damage(self, damage):
         self.health -= damage

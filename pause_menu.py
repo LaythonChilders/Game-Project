@@ -80,6 +80,7 @@ class pause_menu:
 
     def run(self):
         while self.running:
+            self.game.object_renderer.draw_scoreboard()
             self.handle_events()
             self.draw_buttons()
             pygame.display.flip()

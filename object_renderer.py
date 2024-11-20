@@ -7,6 +7,7 @@ class ObjectRenderer:
         self.game = game
         self.screen = game.screen
         self.theme = game.theme
+        self.player = game.player
         self.wall_textures = self.load_wall_textures()
         if (self.theme == "Thanksgiving"):
             self.sky_image = self.get_texture('Resources/Textures/sky.png', (WIDTH, HALF_HEIGHT))
@@ -16,25 +17,39 @@ class ObjectRenderer:
             self.sky_image = self.get_texture('Resources/Textures/christmasSky.png', (WIDTH, HALF_HEIGHT))
         self.sky_offset = 0
         self.blood_screen = self.get_texture('Resources/Textures/blood_screen.png', RESOLUTION)
+        self.game_over_image = self.get_texture('Resources/Textures/game_over.png', RESOLUTION)
+        
         self.digit_size= 90
         self.digit_images = [self.get_texture(f'Resources/Textures/Digits/{i}.png', [self.digit_size] * 2)
                              for i in range(11)]
         self.digits = dict(zip(map(str, range(11)), self.digit_images))
-
-        self.game_over_image = self.get_texture('Resources/Textures/game_over.png', RESOLUTION)
-
+        
         self.letter_size= 120
         self.letter_images = [self.get_texture(f'Resources/Textures/Letters/{char}.png', [self.letter_size] * 2)
                       for char in string.ascii_uppercase]
         self.letter_images.append(self.get_texture(f'Resources/Textures/Letters/colon.png', [self.letter_size] * 2))
         keys = list(string.ascii_uppercase) + [":"]  # A-Z + :
         self.letters = dict(zip(keys, self.letter_images))
+        
+        ##dict for scoreboard
+        self.scoreboard_digit_size= 30
+        self.scoreboard_digit_images = [self.get_texture(f'Resources/Textures/Digits/{i}.png', [self.scoreboard_digit_size] * 2)
+                             for i in range(11)]
+        self.scoreboard_digits = dict(zip(map(str, range(11)), self.scoreboard_digit_images))
+        
+        self.scoreboard_letter_size= 30
+        self.scoreboard_letter_images = [self.get_texture(f'Resources/Textures/Letters/{char}.png', [self.scoreboard_letter_size] * 2)
+                      for char in string.ascii_uppercase]
+        self.scoreboard_letter_images.append(self.get_texture(f'Resources/Textures/Letters/colon.png', [self.scoreboard_letter_size] * 2))
+        keys = list(string.ascii_uppercase) + [":"]  # A-Z + :
+        self.scoreboard_letters = dict(zip(keys, self.scoreboard_letter_images))
 
     def draw(self):
         self.draw_background()
         self.render_game_objects()
         self.draw_player_health()
         self.draw_player_score()
+        #self.draw_scoreboard()
 
     def game_over(self):
         self.screen.blit(self.game_over_image, (0,0))
@@ -109,4 +124,37 @@ class ObjectRenderer:
                 4: self.get_texture('Resources/Textures/thanksgivingwall.png'),
                 5: self.get_texture('Resources/Textures/thanksgivingwall.png'),
             }
+    
+    def draw_scoreboard(self):
+        scores = self.player.scoreboard.get_scores()
+
+        start_x = HALF_WIDTH - 300 
+        start_y = HEIGHT // 3 * 2
+        row_height = self.scoreboard_letter_size + 20  #
+        column_offset = WIDTH // 2
+        
+        for index, score_entry in enumerate(scores):
+            column = index // 5  
+            row = index % 5  
+
             
+            x = start_x + column * column_offset
+            y = start_y + row * row_height
+
+           
+            rank = str(index + 1)
+            for i, char in enumerate(rank):
+                self.screen.blit(self.scoreboard_digits[char], (x + i * self.scoreboard_digit_size, y))
+
+            
+            initials_x = x + len(rank) * self.scoreboard_digit_size + self.scoreboard_letter_size
+            for i, char in enumerate(score_entry["initials"]):
+                self.screen.blit(self.scoreboard_letters[char.upper()], (initials_x + i * self.scoreboard_letter_size, y))
+
+            
+            score_str = str(score_entry["score"])
+            score_x = initials_x + len(score_entry["initials"]) * self.scoreboard_letter_size + self.scoreboard_letter_size
+            for i, char in enumerate(score_str):
+                self.screen.blit(self.scoreboard_digits[char], (score_x + i * self.scoreboard_digit_size, y))
+
+                
