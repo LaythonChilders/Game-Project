@@ -4,7 +4,15 @@
         "score": 150
     },
     {
+        "initials": "LTC",
+        "score": 20
+    },
+    {
         "initials": "AAC",
+        "score": 10
+    },
+    {
+        "initials": "LTC",
         "score": 10
     },
     {
@@ -30,13 +38,5 @@
     {
         "initials": "AAL",
         "score": 4
-    },
-    {
-        "initials": "AAT",
-        "score": 3
-    },
-    {
-        "initials": "LTC",
-        "score": 2
     }
 ]

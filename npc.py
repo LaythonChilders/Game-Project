@@ -5,6 +5,10 @@ class NPC(AnimatedSprite):
     def __init__(self, game, path='Resources/Sprites/NPC/Turkey/0.png', pos=(10.5, 5.5),
                 scale=0.6, shift=0.3, animation_time=180, value=10):
         super().__init__(game, path, pos, scale, shift, animation_time)
+        # Supposed to fix slime position here
+        if self.path == 'Resources/Sprites/NPC/Slime':
+            self.shift = 0.3
+            self.scale = 0.6
         self.attack_images = self.get_images(self.path + '/Attack')
         self.death_images = self.get_images(self.path + '/Death')
         self.idle_images = self.get_images(self.path + '/Idle')
@@ -55,6 +59,7 @@ class NPC(AnimatedSprite):
         if self.animation_trigger:
             self.game.sound.npc_shot.play()
             if random() < self.accuracy:
+                pass
                 self.game.player.get_damage(self.attack_damage)
 
     def animate_death(self):

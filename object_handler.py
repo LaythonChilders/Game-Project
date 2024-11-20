@@ -15,27 +15,37 @@ class ObjectHandler():
 
         self.static_Paths = []
         self.animated_Paths = []
+        self.npc_Paths = []
 
         if (self.theme == "Halloween"):
             self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
             self.animated_Paths.append('Resources/Sprites/Animated_Sprites/Jack_Lantern/0.png')
+            self.npc_Paths.append('Resources/Sprites/NPC/Zombie/0.png')
 
         elif (self.theme == "Christmas"):
             self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
             self.animated_Paths.append('Resources/Sprites/Animated_Sprites/Jack_Lantern/0.png')
+            self.npc_Paths.append('Resources/Sprites/NPC/Slime/0.png')
+
 
         elif (self.theme == "Thanksgiving"):
             self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
-            self.animated_Paths.append('Resources/Sprites/Animated_Sprites/Turkey/0.png')
+            #self.animated_Paths.append('Resources/Sprites/Animated_Sprites/Turkey/0.png')
+            self.npc_Paths.append('Resources/Sprites/NPC/Turkey/0.png')
+
 
         self.npc_positions = {}
         # sprite map
         add_sprite(SpriteObject(game, self.static_Paths[0]))
-        add_sprite(AnimatedSprite(game, self.animated_Paths[0]))
+        #add_sprite(AnimatedSprite(game, self.animated_Paths[0]))
 
         # NPC map
-        add_npc(NPC(game))
-        add_npc(NPC(game, value=150))
+        #add_npc(NPC(game))
+        #add_npc(NPC(game, self.npc_Paths[0]))
+        add_npc(NPC(game, self.npc_Paths[0]))
+        add_npc(NPC(game, self.npc_Paths[0]))
+
+        #(NPC(game, value=150))
  
 
     def update(self):
