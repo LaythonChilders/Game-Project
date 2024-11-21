@@ -14,7 +14,7 @@ class ObjectRenderer:
         elif (self.theme == "Halloween"):
             self.sky_image = self.get_texture('Resources/Textures/stormySky.png', (WIDTH, HALF_HEIGHT))
         elif (self.theme == "Christmas"):
-            self.sky_image = self.get_texture('Resources/Textures/christmasSky.png', (WIDTH, HALF_HEIGHT))
+            self.sky_image = self.get_texture('Resources/Textures/nightSky2.png', (WIDTH, HALF_HEIGHT))
         self.sky_offset = 0
         self.blood_screen = self.get_texture('Resources/Textures/blood_screen.png', RESOLUTION)
         self.game_over_image = self.get_texture('Resources/Textures/catOver.png', RESOLUTION)
