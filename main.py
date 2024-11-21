@@ -35,7 +35,6 @@ class CatDoom:
         self.menu = Menu(self)
         self.pause_menu = pause_menu(self)
         self.weapon = Weapon(self)
-        self.sound = Sound(self)
         self.pathfinding = PathFinding(self)
         self.running = True
 
@@ -43,6 +42,7 @@ class CatDoom:
         self.object_handler = ObjectHandler(self)
         self.object_renderer = ObjectRenderer(self)
         self.raycasting = Raycasting(self)
+        self.sound = Sound(self)
 
     def draw_frame(self): #called in loop to update/redraw each frame
         self.player.update()
