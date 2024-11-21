@@ -17,7 +17,7 @@ class ObjectRenderer:
             self.sky_image = self.get_texture('Resources/Textures/christmasSky.png', (WIDTH, HALF_HEIGHT))
         self.sky_offset = 0
         self.blood_screen = self.get_texture('Resources/Textures/blood_screen.png', RESOLUTION)
-        self.game_over_image = self.get_texture('Resources/Textures/game_over.png', RESOLUTION)
+        self.game_over_image = self.get_texture('Resources/Textures/catOver.png', RESOLUTION)
         
         self.digit_size= 90
         self.digit_images = [self.get_texture(f'Resources/Textures/Digits/{i}.png', [self.digit_size] * 2)
