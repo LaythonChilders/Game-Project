@@ -38,9 +38,12 @@ class Player:
         self.catGame.sound.player_pain.play()
         self.check_game_over()
 
+    def add_health(self, health_value):
+        if self.health < PLAYER_MAX_HEALTH:
+            self.health = min(self.health + health_value, PLAYER_MAX_HEALTH)
+            self.catGame.sound.health_pickup.play()
+
     def single_fire_event(self, event):
-                        
-        
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1 and not self.shot and not self.catGame.weapon.reloading:
                 self.catGame.sound.shotgun.play()
@@ -89,8 +92,6 @@ class Player:
             self.x += dx
         if self.check_wall(int(self.x), int(self.y + dy * SCALE)):
             self.y += dy
-
-
 
     def draw(self):
         pygame.draw.line(self.catGame.screen, 'yellow', (self.x * 100, self.y * 100),

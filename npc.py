@@ -141,7 +141,6 @@ class NPC(AnimatedSprite):
         x_map, y_map = self.game.player.map_pos
         ray_angle = self.game.player.angle - HALF_FOV + 0.0001
 
-        # add this line to avoid errors!
         texture_vert, texture_hor = 1,1
         
         ray_angle = self.theta

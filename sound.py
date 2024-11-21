@@ -14,6 +14,7 @@ class Sound:
         self.shotgun = pg.mixer.Sound(self.path + 'bottle-pop.mp3')
         self.reload = pg.mixer.Sound(self.path + 'gun-reload.mp3')
         self.player_pain = pg.mixer.Sound(self.path + 'player-death.mp3')
+        self.health_pickup = pg.mixer.Sound(self.path + 'health-pickup.mp3')
 
         if (self.theme == "Thanksgiving"):
             self.npc_death = pg.mixer.Sound(self.path + 'turkey-death.mp3')

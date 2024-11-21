@@ -13,7 +13,7 @@ class ObjectHandler():
         add_sprite = self.add_sprite
         add_npc = self.add_npc
 
-        self.static_Paths = []
+        self.static_Paths = ['Resources/Sprites/Static_Sprites/health-kit.png']
         self.animated_Paths = []
 
         if (self.theme == "Halloween"):
@@ -57,8 +57,9 @@ class ObjectHandler():
 
 
         self.npc_positions = {}
+
         # sprite map
-        #add_sprite(SpriteObject(game, self.static_Paths[0]))
+        add_sprite(SpriteObject(game, self.static_Paths[0], health_value=10, scale=0.2, shift= 1))
         #add_sprite(AnimatedSprite(game, self.animated_Paths[0]))
  
 
