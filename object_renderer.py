@@ -12,7 +12,7 @@ class ObjectRenderer:
         if (self.theme == "Thanksgiving"):
             self.sky_image = self.get_texture('Resources/Textures/sky.png', (WIDTH, HALF_HEIGHT))
         elif (self.theme == "Halloween"):
-            self.sky_image = self.get_texture('Resources/Textures/halloweenSky.png', (WIDTH, HALF_HEIGHT))
+            self.sky_image = self.get_texture('Resources/Textures/stormySky.png', (WIDTH, HALF_HEIGHT))
         elif (self.theme == "Christmas"):
             self.sky_image = self.get_texture('Resources/Textures/christmasSky.png', (WIDTH, HALF_HEIGHT))
         self.sky_offset = 0
