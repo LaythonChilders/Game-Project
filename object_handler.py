@@ -83,6 +83,18 @@ class ObjectHandler():
             mouse.set_visible(False)
             self.game.pause_menu.exit_to_menu() 
 
+        if (self.npc_count <= 5 and self.theme == "Thanksgiving"):
+            self.add_npc(TurkeyNPC(self.game, pos=(11.0, 19.0)))
+            self.add_npc(TurkeyNPC(self.game, pos=(11.5, 4.5)))
+            self.add_npc(TurkeyNPC(self.game, pos=(13.5, 6.5)))
+            self.add_npc(TurkeyNPC(self.game, pos=(2.0, 20.0)))
+            self.add_npc(TurkeyNPC(self.game, pos=(4.0, 29.0)))
+            self.add_npc(TurkeyNPC(self.game, pos=(5.5, 14.5)))
+            self.add_npc(TurkeyNPC(self.game, pos=(5.5, 16.5)))
+            self.add_npc(TurkeyNPC(self.game, pos=(14.5, 25.5)))
+            self.npc_count += 8
+
+
     def add_npc(self, npc):
         self.npc_list.append(npc)
 

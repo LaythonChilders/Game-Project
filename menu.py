@@ -11,7 +11,7 @@ class Menu:
         self.running = True
         self.selected_theme = None  # Stores the selected theme as a string
 
-        button_width = 400
+        button_width = 700
         button_height = 50
         button_margin = 20
 
@@ -37,7 +37,7 @@ class Menu:
                 "action": lambda: self.set_theme("Christmas"),
             },
             {
-                "text": "Thanksgiving Theme",
+                "text": "Thanksgiving Theme - Endless",
                 "rect": pygame.Rect(
                     HALF_WIDTH - button_width // 2,
                     HALF_HEIGHT + button_height + button_margin,
