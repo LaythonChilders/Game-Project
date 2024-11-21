@@ -133,7 +133,7 @@ class ObjectRenderer:
         if (self.theme == "Halloween"):
             return {
                 1: self.get_texture('Resources/Textures/stoneWall.png'),
-                2: self.get_texture('Resources/Textures/stoneWall.png'),
+                2: self.get_texture('Resources/Textures/rustyBrick.png'),
                 3: self.get_texture('Resources/Textures/stoneWall.png'),
                 4: self.get_texture('Resources/Textures/brick.png'),
                 5: self.get_texture('Resources/Textures/metal.png'),
