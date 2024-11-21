@@ -18,7 +18,7 @@ class NPCFactory:
 
 class NPC(AnimatedSprite):
     def __init__(self, game, path, pos=(10.5, 5.5),
-                 scale=0.6, shift=0.3, animation_time=180, value=10):
+                 scale=0.6, shift=0.3, animation_time=180, value=10, health_value = 0):
         super().__init__(game, path, pos, scale, shift, animation_time)
         self.attack_images = self.get_images(self.path + '/Attack')
         self.death_images = self.get_images(self.path + '/Death')
@@ -38,10 +38,20 @@ class NPC(AnimatedSprite):
         self.frame_counter = 0
         self.player_search_trigger = False
         self.value = value
+        self.health_granted = False
+        self.health_value = health_value
+
+    def grant_health_to_player(self):
+        if not self.alive and not self.health_granted and self.player.health < 100:
+            if self.dist < 1.0: 
+                self.game.player.add_health(self.health_value)
+                self.health_granted = True
+                 
 
     def update(self):
         self.check_animation_time()
-        self.get_sprite()
+        if(self.health_granted == False):
+            self.get_sprite()
         self.run_logic()
 
     def check_wall(self, x, y):
@@ -126,6 +136,7 @@ class NPC(AnimatedSprite):
                 self.animate(self.idle_images)
         else:
             self.animate_death()
+            self.grant_health_to_player()
 
     @property
     def map_pos(self):
@@ -212,7 +223,7 @@ class ZombieNPC(NPC):
 class TurkeyNPC(NPC):
     def __init__(self, game, path='Resources/Sprites/NPC/Turkey/0.png', pos=(10.5, 5.5),
                  scale=0.6, shift=0.38, animation_time=180):
-        super().__init__(game, path, pos, scale, shift, animation_time)
+        super().__init__(game, path, pos, scale, shift, animation_time, health_value=2)
 
 class SlimeNPC(NPC):
     def __init__(self, game, path='Resources/Sprites/NPC/Slime/0.png', pos=(10.5, 5.5),

@@ -135,23 +135,23 @@ class ObjectRenderer:
                 1: self.get_texture('Resources/Textures/stoneWall.png'),
                 2: self.get_texture('Resources/Textures/stoneWall.png'),
                 3: self.get_texture('Resources/Textures/stoneWall.png'),
-                4: self.get_texture('Resources/Textures/stoneWall.png'),
-                5: self.get_texture('Resources/Textures/stoneWall.png'),
+                4: self.get_texture('Resources/Textures/brick.png'),
+                5: self.get_texture('Resources/Textures/metal.png'),
             }
         elif (self.theme == "Christmas"):
             return {
                 1: self.get_texture('Resources/Textures/christmaswall.png'),
                 2: self.get_texture('Resources/Textures/christmaswall.png'),
                 3: self.get_texture('Resources/Textures/christmaswall.png'),
-                4: self.get_texture('Resources/Textures/christmaswall.png'),
-                5: self.get_texture('Resources/Textures/christmaswall.png'),
+                4: self.get_texture('Resources/Textures/brick2.png'),
+                5: self.get_texture('Resources/Textures/christmasTree.png'),
             }
         elif (self.theme == "Thanksgiving"):
             return {
                 1: self.get_texture('Resources/Textures/thanksgivingwall.png'),
                 2: self.get_texture('Resources/Textures/thanksgivingwall.png'),
                 3: self.get_texture('Resources/Textures/thanksgivingwall.png'),
-                4: self.get_texture('Resources/Textures/thanksgivingwall.png'),
+                4: self.get_texture('Resources/Textures/brick2.png'),
                 5: self.get_texture('Resources/Textures/thanksgivingwall.png'),
             }
     
