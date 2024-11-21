@@ -1,32 +1,21 @@
 from sprite_object import *
 from random import randint, random, choice
 
-class NPCFactory:
-    """
-    Factory for creating NPCs.
-    """
-    @staticmethod
-    def create_npc(npc_type, game, pos=(10.5, 5.5), scale=0.6, shift=0.38, animation_time=180):
-        if npc_type == "zombie":
-            return ZombieNPC(game, pos=pos, scale=scale, shift=shift, animation_time=animation_time)
-        elif npc_type == "turkey":
-            return TurkeyNPC(game, pos=pos, scale=scale, shift=shift, animation_time=animation_time)
-        elif npc_type == "slime":
-            return SlimeNPC(game, pos=pos, scale=scale, shift=shift, animation_time=animation_time)
-        else:
-            raise ValueError(f"Unknown NPC type: {npc_type}")
-
 class NPC(AnimatedSprite):
-    def __init__(self, game, path, pos=(10.5, 5.5),
-                 scale=0.6, shift=0.3, animation_time=180, value=10):
+    def __init__(self, game, path='Resources/Sprites/NPC/Zombie/0.png', pos=(10.5, 5.5),
+                scale=0.6, shift=0.3, animation_time=180, value=10):
         super().__init__(game, path, pos, scale, shift, animation_time)
+        # Supposed to fix slime position here
+        if self.path == 'Resources/Sprites/NPC/Slime':
+            self.shift = 0.3
+            self.scale = 0.6
         self.attack_images = self.get_images(self.path + '/Attack')
         self.death_images = self.get_images(self.path + '/Death')
         self.idle_images = self.get_images(self.path + '/Idle')
         self.pain_images = self.get_images(self.path + '/Pain')
         self.walk_images = self.get_images(self.path + '/Walk')
 
-        self.attack_dist = randint(1, 1)
+        self.attack_dist = randint(1,1)
         self.speed = 0.03
         self.size = 10
         self.health = 100
@@ -43,6 +32,7 @@ class NPC(AnimatedSprite):
         self.check_animation_time()
         self.get_sprite()
         self.run_logic()
+        #self.draw_ray_cast()
 
     def check_wall(self, x, y):
         return (x, y) not in self.game.map.world_map
@@ -206,15 +196,15 @@ class NPC(AnimatedSprite):
 
 class ZombieNPC(NPC):
     def __init__(self, game, path='Resources/Sprites/NPC/Zombie/0.png', pos=(10.5, 5.5),
-                 scale=0.6, shift=0.38, animation_time=180):
+                scale=0.6, shift=0.38, animation_time=180):
         super().__init__(game, path, pos, scale, shift, animation_time)
 
 class TurkeyNPC(NPC):
     def __init__(self, game, path='Resources/Sprites/NPC/Turkey/0.png', pos=(10.5, 5.5),
-                 scale=0.6, shift=0.38, animation_time=180):
+                scale=0.6, shift=0.38, animation_time=180):
         super().__init__(game, path, pos, scale, shift, animation_time)
 
 class SlimeNPC(NPC):
     def __init__(self, game, path='Resources/Sprites/NPC/Slime/0.png', pos=(10.5, 5.5),
-                 scale=0.6, shift=0.3, animation_time=180):
+                scale=0.6, shift=0.38, animation_time=180):
         super().__init__(game, path, pos, scale, shift, animation_time)
