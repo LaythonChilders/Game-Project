@@ -24,5 +24,5 @@ class Sound:
             self.npc_shot = pg.mixer.Sound(self.path + 'zombie-bite.mp3')
 
         elif (self.theme == "Christmas"):
-            self.npc_death = pg.mixer.Sound(self.path + 'zombie-death.mp3')
-            self.npc_shot = pg.mixer.Sound(self.path + 'zombie-bite.mp3')
+            self.npc_death = pg.mixer.Sound(self.path + 'slime-death.mp3')
+            self.npc_shot = pg.mixer.Sound(self.path + 'slime-hurt.mp3')
