@@ -18,7 +18,7 @@ class NPCFactory:
 
 class NPC(AnimatedSprite):
     def __init__(self, game, path, pos=(10.5, 5.5),
-                 scale=0.6, shift=0.3, animation_time=180, value=10, health_value = 0):
+                 scale=0.6, shift=0.3, animation_time=180, value=10, health_value = 0, attack_damage=10):
         super().__init__(game, path, pos, scale, shift, animation_time)
         self.attack_images = self.get_images(self.path + '/Attack')
         self.death_images = self.get_images(self.path + '/Death')
@@ -30,7 +30,7 @@ class NPC(AnimatedSprite):
         self.speed = 0.03
         self.size = 10
         self.health = 100
-        self.attack_damage = 10
+        self.attack_damage = attack_damage
         self.accuracy = 0.90
         self.alive = True
         self.pain = False
@@ -228,4 +228,4 @@ class TurkeyNPC(NPC):
 class SlimeNPC(NPC):
     def __init__(self, game, path='Resources/Sprites/NPC/Slime/0.png', pos=(10.5, 5.5),
                  scale=0.6, shift=0.3, animation_time=180):
-        super().__init__(game, path, pos, scale, shift, animation_time)
+        super().__init__(game, path, pos, scale, shift, animation_time, attack_damage=20)
