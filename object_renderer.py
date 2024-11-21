@@ -44,12 +44,15 @@ class ObjectRenderer:
         keys = list(string.ascii_uppercase) + [":"]  # A-Z + :
         self.scoreboard_letters = dict(zip(keys, self.scoreboard_letter_images))
 
+        self.character_health_images = self.load_character_health_images()
+
     def draw(self):
         self.draw_background()
         self.render_game_objects()
         self.draw_player_health()
         self.draw_player_score()
         #self.draw_scoreboard()
+        self.show_character_health()
 
     def game_over(self):
         self.screen.blit(self.game_over_image, (0,0))
@@ -59,6 +62,33 @@ class ObjectRenderer:
         for i, char in enumerate(health):
             self.screen.blit(self.digits[char], (i * self.digit_size, 0))
         self.screen.blit(self.digits['10'], ((i +1) * self.digit_size, 0))
+
+    def show_character_health(self):
+        """Displays the character image based on the player's current health."""
+        health = self.player.health
+        if health > 75:
+            image = self.character_health_images[100]
+        elif health > 50:
+            image = self.character_health_images[75]
+        elif health > 25:
+            image = self.character_health_images[50]
+        elif health > 10:
+            image = self.character_health_images[25]
+        else:
+            image = self.character_health_images[10]
+
+        image_rect = image.get_rect(bottomright=(WIDTH, HEIGHT))
+        self.screen.blit(image, image_rect)
+
+    def load_character_health_images(self):
+        health_images = {
+            100: self.get_texture('Resources/character/character100.png'),
+            75: self.get_texture('Resources/character/character75.png'),
+            50: self.get_texture('Resources/character/character50.png'),
+            25: self.get_texture('Resources/character/character25.png'),
+            10: self.get_texture('Resources/character/character10.png'),
+        }
+        return health_images
 
     def draw_player_score(self):
         score = str(self.game.player.score)
