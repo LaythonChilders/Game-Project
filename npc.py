@@ -2,9 +2,9 @@ from sprite_object import *
 from random import randint, random, choice
 
 class NPCFactory:
-    """
-    Factory for creating NPCs.
-    """
+    
+    #Factory for creating NPCs.
+    
     @staticmethod
     def create_npc(npc_type, game, pos=(10.5, 5.5), scale=0.6, shift=0.38, animation_time=180):
         if npc_type == "zombie":
