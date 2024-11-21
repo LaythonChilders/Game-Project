@@ -22,7 +22,7 @@ class SpriteObject:
         def check_collision_with_player(self):
                 if self.health_value == 0:
                         return
-                if self.active and self.dist < 1.0:
+                if self.active and self.dist < 1.0 and self.player.health < 100:
                         self.player.add_health(self.health_value)
                         self.active = False
 

@@ -1,5 +1,6 @@
 from sprite_object import *
 from npc import *
+from pygame import mouse
 
 class ObjectHandler():
     def __init__(self, game):
@@ -12,6 +13,7 @@ class ObjectHandler():
         self.anim_sprite_path = 'Resources/Sprites/Animated_Sprites/'
         add_sprite = self.add_sprite
         add_npc = self.add_npc
+        self.npc_count = 0
 
         self.static_Paths = ['Resources/Sprites/Static_Sprites/health-kit.png']
         self.animated_Paths = []
@@ -28,6 +30,7 @@ class ObjectHandler():
             add_npc(ZombieNPC(game, pos=(5.5, 14.5)))
             add_npc(ZombieNPC(game, pos=(5.5, 16.5)))
             add_npc(ZombieNPC(game, pos=(14.5, 25.5)))
+            self.npc_count = 8 #Make this equal num of npc spawned
 
         elif (self.theme == "Christmas"):
             #self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
@@ -41,6 +44,8 @@ class ObjectHandler():
             add_npc(SlimeNPC(game, pos=(5.5, 14.5)))
             add_npc(SlimeNPC(game, pos=(5.5, 16.5)))
             add_npc(SlimeNPC(game, pos=(14.5, 25.5)))
+            self.npc_count = 8 #Make this equal num of npc spawned
+
 
         elif (self.theme == "Thanksgiving"):
             #self.static_Paths.append('Resources/Sprites/Static_Sprites/pumpkin.png')
@@ -53,6 +58,8 @@ class ObjectHandler():
             add_npc(TurkeyNPC(game, pos=(5.5, 14.5)))
             add_npc(TurkeyNPC(game, pos=(5.5, 16.5)))
             add_npc(TurkeyNPC(game, pos=(14.5, 25.5)))
+            self.npc_count = 8 #Make this equal num of npc spawned
+
 
 
 
@@ -67,6 +74,14 @@ class ObjectHandler():
         self.npc_positions = {npc.map_pos for npc in self.npc_list if npc.alive}
         [sprite.update() for sprite in self.sprite_list]
         [npc.update() for npc in self.npc_list]
+
+        if(self.npc_count == 0): #No more NPCs - player wins
+            self.game.object_renderer.game_over()
+            mouse.set_visible(True)
+            self.game.sound.level_win.play()
+            self.game.pause_menu.death()
+            mouse.set_visible(False)
+            self.game.pause_menu.exit_to_menu() 
 
     def add_npc(self, npc):
         self.npc_list.append(npc)

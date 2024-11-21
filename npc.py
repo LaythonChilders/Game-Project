@@ -98,6 +98,7 @@ class NPC(AnimatedSprite):
             self.alive = False
             self.game.sound.npc_death.play()
             self.game.player.score += self.value
+            self.game.object_handler.npc_count = self.game.object_handler.npc_count - 1
 
     def run_logic(self):
         if self.alive == True:
