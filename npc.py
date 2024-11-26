@@ -42,7 +42,7 @@ class NPC(AnimatedSprite):
         self.health_value = health_value
 
     def grant_health_to_player(self):
-        if not self.alive and not self.health_granted and self.player.health < 100:
+        if not self.alive and not self.health_granted and self.player.health < 100 and self.health_value != 0:
             if self.dist < 1.0: 
                 self.game.player.add_health(self.health_value)
                 self.health_granted = True
