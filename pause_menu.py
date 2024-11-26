@@ -1,6 +1,7 @@
 import pygame
 import sys
 from settings import *
+from save_state import *
 
 class pause_menu:
     def __init__(self, game):
@@ -14,41 +15,28 @@ class pause_menu:
 
         button_width = 400
         button_height = 50
-        button_margin = 20
+        num_buttons = 4  # Total number of buttons
+        total_height = (button_height * num_buttons) + (20 * (num_buttons - 1))  # Buttons + gaps
+        start_y = (HALF_HEIGHT - total_height // 2)  # Start vertically centered
 
-        self.buttons = [
-            {
-                "text": "Return to main menu",
+        # Create buttons dynamically with even spacing
+        self.buttons = []
+        button_texts = ["Return to main menu", "Restart level", "Save Game", "Exit"]
+        button_actions = [self.exit_to_menu, self.restart_level, self.save_game, self.exit_game]
+
+        for i in range(num_buttons):
+            y_position = start_y + i * (button_height + 20)  # Calculate y-position dynamically
+            self.buttons.append({
+                "text": button_texts[i],
                 "rect": pygame.Rect(
                     HALF_WIDTH - button_width // 2,
-                    HALF_HEIGHT - button_height - button_margin,
+                    y_position,
                     button_width,
                     button_height,
                 ),
-                "action": lambda: self.exit_to_menu(),
-            },
-            {
-                "text": "Restart level",
-                "rect": pygame.Rect(
-                    HALF_WIDTH - button_width // 2,
-                    HALF_HEIGHT,
-                    button_width,
-                    button_height,
-                ),
-                "action": lambda: self.restart_level(),
-            },
-            {
-                "text": "Exit",
-                "rect": pygame.Rect(
-                    HALF_WIDTH - button_width // 2,
-                    HALF_HEIGHT + button_height + button_margin,
-                    button_width,
-                    button_height,
-                ),
-                "action": lambda: self.exit_game(),
-            },
-        ]
-    
+                "action": button_actions[i],
+            })
+
     def restart_level(self):
         self.game.running = False
         self.running = False
@@ -62,6 +50,12 @@ class pause_menu:
     def exit_game(self):
         pygame.quit()
         sys.exit()
+
+    def save_game(self):
+        # Save the game state using the `save_state` class
+        state_saver = save_state(self.game)
+        state_saver.get_game_state()
+        state_saver.save_game_state()
 
     def draw_nav_buttons(self):
         for button in self.buttons:

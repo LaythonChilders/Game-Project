@@ -3,12 +3,12 @@ import pygame as pygame
 import math
 
 class Player:
-    def __init__ (self, catGame):
+    def __init__ (self, catGame, map_pos = PLAYER_POS, health = PLAYER_MAX_HEALTH):
         self._catgame = catGame
-        self._x, self._y = PLAYER_POS
+        self._x, self._y = map_pos
         self._angle = PLAYER_ANGLE
         self._shot = False
-        self._health = PLAYER_MAX_HEALTH
+        self._health = health
 
     def check_game_over(self):
         if self._health < 1:

@@ -1,0 +1,133 @@
+{
+    "player": {
+        "health": 80,
+        "position": [
+            12,
+            6
+        ]
+    },
+    "score": 10,
+    "theme": "Halloween",
+    "npcs": [
+        {
+            "type": "ZombieNPC",
+            "position": [
+                11,
+                16
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Zombie",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 0,
+            "attack_damage": 10
+        },
+        {
+            "type": "ZombieNPC",
+            "position": [
+                11,
+                5
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Zombie",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 0,
+            "attack_damage": 10
+        },
+        {
+            "type": "ZombieNPC",
+            "position": [
+                11,
+                6
+            ],
+            "health": 0,
+            "path": "Resources/Sprites/NPC/Zombie",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 0,
+            "attack_damage": 10
+        },
+        {
+            "type": "ZombieNPC",
+            "position": [
+                2,
+                20
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Zombie",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 0,
+            "attack_damage": 10
+        },
+        {
+            "type": "ZombieNPC",
+            "position": [
+                4,
+                29
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Zombie",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 0,
+            "attack_damage": 10
+        },
+        {
+            "type": "ZombieNPC",
+            "position": [
+                5,
+                14
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Zombie",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 0,
+            "attack_damage": 10
+        },
+        {
+            "type": "ZombieNPC",
+            "position": [
+                5,
+                16
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Zombie",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 0,
+            "attack_damage": 10
+        },
+        {
+            "type": "ZombieNPC",
+            "position": [
+                14,
+                25
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Zombie",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 0,
+            "attack_damage": 10
+        }
+    ]
+}

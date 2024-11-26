@@ -4,7 +4,6 @@ from random import randint, random, choice
 class NPCFactory:
     
     #Factory for creating NPCs.
-    
     @staticmethod
     def create_npc(npc_type, game, pos=(10.5, 5.5), scale=0.6, shift=0.38, animation_time=180):
         if npc_type == "zombie":
@@ -18,7 +17,7 @@ class NPCFactory:
 
 class NPC(AnimatedSprite):
     def __init__(self, game, path, pos=(10.5, 5.5),
-                 scale=0.6, shift=0.3, animation_time=180, value=10, health_value = 0, attack_damage=10):
+                 scale=0.6, shift=0.3, animation_time=180, point_value=10, health_value = 0, attack_damage=10):
         super().__init__(game, path, pos, scale, shift, animation_time)
         self.attack_images = self.get_images(self.path + '/Attack')
         self.death_images = self.get_images(self.path + '/Death')
@@ -29,7 +28,7 @@ class NPC(AnimatedSprite):
         self.attack_dist = randint(1, 1)
         self.speed = 0.03
         self.size = 10
-        self.health = 100
+        self._health = 100
         self.attack_damage = attack_damage
         self.accuracy = 0.90
         self.alive = True
@@ -37,9 +36,12 @@ class NPC(AnimatedSprite):
         self.ray_cast_value = False
         self.frame_counter = 0
         self.player_search_trigger = False
-        self.value = value
+        self.point_value = point_value
         self.health_granted = False
         self.health_value = health_value
+
+        self.scale = scale
+        self.shift = shift
 
     def grant_health_to_player(self):
         if not self.alive and not self.health_granted and self.player.health < 100 and self.health_value != 0:
@@ -106,7 +108,7 @@ class NPC(AnimatedSprite):
         if self.health < 1:
             self.alive = False
             self.game.sound.npc_death.play()
-            self.game.score_system.add_points(self.value)
+            self.game.score_system.add_points(self.point_value)
             self.game.object_handler.npc_count = self.game.object_handler.npc_count - 1
 
     def run_logic(self):
@@ -141,6 +143,14 @@ class NPC(AnimatedSprite):
     def map_pos(self):
         return int(self.x), int(self.y)
     
+    @property
+    def health(self):
+        return self._health
+    
+    @health.setter
+    def health(self, value):
+        self._health = value
+
     def ray_cast_player_npc(self):
         if self.game.player.map_pos == self.map_pos:
             return True

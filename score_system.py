@@ -5,8 +5,8 @@ import sys
 import string
 
 class Score_system:
-    def __init__(self, game, filename="scores.json"):
-        self._current_score = 0
+    def __init__(self, game, filename="scores.json", current_score = 0):
+        self._current_score = current_score
         self.filename = filename
         self.game = game
         self.clock = game.clock
