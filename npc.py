@@ -17,7 +17,7 @@ class NPCFactory:
 
 class NPC(AnimatedSprite):
     def __init__(self, game, path, pos=(10.5, 5.5),
-                 scale=0.6, shift=0.3, animation_time=180, point_value=10, health_value = 0, attack_damage=10):
+                 scale=0.6, shift=0.3, animation_time=180, point_value=10, health_value = 0, attack_damage=10, health = 100):
         super().__init__(game, path, pos, scale, shift, animation_time)
         self.attack_images = self.get_images(self.path + '/Attack')
         self.death_images = self.get_images(self.path + '/Death')
@@ -28,10 +28,10 @@ class NPC(AnimatedSprite):
         self.attack_dist = randint(1, 1)
         self.speed = 0.03
         self.size = 10
-        self._health = 100
+        self._health = health
         self.attack_damage = attack_damage
         self.accuracy = 0.90
-        self.alive = True
+        self.alive = True if self.health > 1 else False
         self.pain = False
         self.ray_cast_value = False
         self.frame_counter = 0
@@ -160,12 +160,17 @@ class NPC(AnimatedSprite):
 
         ox, oy = self.player.pos
         x_map, y_map = self.game.player.map_pos
-        ray_angle = self.game.player.angle - HALF_FOV + 0.0001
 
         texture_vert, texture_hor = 1,1
         
+        if self.theta == 0:
+            dx = self.x - self.player.x
+            dy = self.y - self.player.y
+            self.dx, self.dy = dx, dy
+            self.theta = math.atan2(dy, dx)
+
         ray_angle = self.theta
-    
+
         sin_a = math.sin(ray_angle)
         cos_a = math.cos(ray_angle)
         

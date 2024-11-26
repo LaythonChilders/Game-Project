@@ -60,8 +60,9 @@ class Menu:
         ]
 
     def set_theme(self, theme):
-        self.selected_theme = theme
+        self.game.theme = theme
         self.running = False
+        self.game.init_theme_dependent()
 
     def draw_buttons(self):
         self.screen.fill('black')
@@ -83,12 +84,12 @@ class Menu:
                             button["action"]()
 
     def load_game(self):
-        state_saver = save_state(self.game)
-        state_saver.load_game_state()
-        state_saver.apply_loaded_game_state()
-        self.running = False  # Exit the menu after loading the game
+        self.game.state_saver.load_game_state()
+        self.game.state_saver.apply_loaded_game_state()
+        self.running = False
 
     def run(self):
+        pygame.mouse.set_visible(True)
         while self.running:
             self.handle_events()
             self.draw_buttons()
@@ -96,4 +97,5 @@ class Menu:
             self.clock.tick(FPS)
             pygame.display.set_caption(f'{self.clock.get_fps(): .1f}')
 
-        return self.selected_theme
+        pygame.mouse.set_visible(False)
+

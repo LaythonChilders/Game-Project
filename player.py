@@ -3,10 +3,10 @@ import pygame as pygame
 import math
 
 class Player:
-    def __init__ (self, catGame, map_pos = PLAYER_POS, health = PLAYER_MAX_HEALTH):
+    def __init__ (self, catGame, map_pos = PLAYER_POS, health = PLAYER_MAX_HEALTH, angle = PLAYER_ANGLE):
         self._catgame = catGame
         self._x, self._y = map_pos
-        self._angle = PLAYER_ANGLE
+        self._angle = angle
         self._shot = False
         self._health = health
 
@@ -103,6 +103,14 @@ class Player:
         self.mouse_control()
 
     @property
+    def angle(self):
+        return self._angle
+    
+    @angle.setter
+    def angle(self, value):
+        self._angle = value
+
+    @property
     def pos(self):
         return self._x, self._y
     
@@ -110,10 +118,11 @@ class Player:
     def map_pos(self):
         return int(self._x), int(self._y)
     
-    @property
-    def angle(self):
-        return self._angle
-    
+    @map_pos.setter
+    def map_pos(self, value):
+        self._x = value[0]
+        self._y = value[1]
+
     @property
     def x(self):
         return self._x
@@ -125,6 +134,10 @@ class Player:
     @property
     def health(self):
         return self._health
+    
+    @health.setter
+    def health(self, value):
+        self._health = value
     
     @property
     def shot(self):

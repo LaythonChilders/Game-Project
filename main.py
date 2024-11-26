@@ -25,8 +25,7 @@ class CatDoom:
         self.global_trigger = False
         self.global_event = pygame.USEREVENT + 0
         pygame.time.set_timer(self.global_event, 40)
-        self.new_game() 
-
+        self.state_saver = save_state(self)
 
     def new_game(self):
         self.map = Map(self)
@@ -40,6 +39,12 @@ class CatDoom:
 
     def init_theme_dependent(self):
         self.object_handler = ObjectHandler(self)
+        self.object_renderer = ObjectRenderer(self)
+        self.raycasting = Raycasting(self)
+        self.sound = Sound(self)
+
+    def load_save_theme_dependent(self, npc_list, npc_amt):
+        self.object_handler = ObjectHandler(self, npc_list, npc_sum = npc_amt)
         self.object_renderer = ObjectRenderer(self)
         self.raycasting = Raycasting(self)
         self.sound = Sound(self)
@@ -73,17 +78,11 @@ class CatDoom:
 
             self.player.single_fire_event(event)
 
-
     def check_exit(self): # checks for events/keystrokes that signal user intent to exit
         for event in pygame.event.get():
             if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 pygame.quit()
                 sys.exit()
-
-    def mainMenu(self):
-        pygame.mouse.set_visible(True)
-        self.theme = self.menu.run()
-        pygame.mouse.set_visible(False)
 
     def main_loop(self):
         while self.running:
@@ -94,9 +93,8 @@ class CatDoom:
             
     def setup_game(self):
         self.new_game()
-        self.mainMenu()
-        self.init_theme_dependent()
-        self.main_loop()
+        self.menu.run()
+
 
     def restart_level(self):
         pygame.mouse.set_visible(False)
@@ -108,4 +106,5 @@ class CatDoom:
 if __name__ == '__main__':
     catGame = CatDoom()
     catGame.setup_game()
+    catGame.main_loop()
 

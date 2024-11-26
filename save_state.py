@@ -1,5 +1,6 @@
 import json
 from object_handler import *
+from settings import *
 
 
 class save_state:
@@ -10,8 +11,10 @@ class save_state:
     def get_game_state(self):
         # Extract all necessary data from the game state
         self.npc_list = self.game.object_handler.npc_list  # This is an array of NPC objects
+        self.npc_count = self.game.object_handler.npc_count
         self.player_health = self.game.player.health
         self.player_pos = self.game.player.map_pos
+        self.player_angle = self.game.player.angle
         self.score = self.game.score_system.current_score
         self.theme = self.game.theme
 
@@ -21,15 +24,17 @@ class save_state:
             "player": {
                 "health": self.player_health,
                 "position": self.player_pos,
+                "angle": self.player_angle,
             },
             "score": self.score,
             "theme": self.theme,
+            "npc_count": self.npc_count,
             "npcs": [
                 {
                     "type": type(npc).__name__,  # Save the NPC class name
                     "position": npc.map_pos,
                     "health": npc.health,
-                    "path": npc.path,
+                    "path": npc.path + "/0.png",
                     "scale": npc.scale,
                     "shift": npc.shift,
                     "animation_time": npc.animation_time,
@@ -66,24 +71,31 @@ class save_state:
 
         # Restore player data
         player_data = self.loaded_data.get("player", {})
-        self.game.player.health = player_data.get("health", 100)  # Default health if missing
-        self.game.player.map_pos = tuple(player_data.get("position", (0, 0)))
+        self.game.player.health = player_data.get("health", PLAYER_MAX_HEALTH)  # Default health if missing
+        self.game.player.angle = player_data.get("angle", PLAYER_ANGLE)
+        self.game.player.map_pos = tuple(player_data.get("position", PLAYER_POS))
 
         # Restore score and theme
         self.game.score_system.current_score = self.loaded_data.get("score", 0)
         self.game.theme = self.loaded_data.get("theme", "default_theme")
+        print(f"{self.game.theme} + Test")
 
         # Restore NPC data
         npc_data = self.loaded_data.get("npcs", [])
-        self.game.object_handler.npc_list = self.create_npcs_from_data(npc_data)
+        npc_list = self.create_npcs_from_data(npc_data)
+
+        npc_count = self.loaded_data.get("npc_count", 0)
+
+        #self.game.object_handler = ObjectHandler(self.game)
+        #self.game.object_handler.npc_list = npc_list
+
+        self.game.load_save_theme_dependent(npc_list, npc_count)
 
     def create_npcs_from_data(self, npc_data):
         # Generate an array of NPCs based on the saved data
         npc_list = []
         for npc_info in npc_data:
-            npc_type = npc_info.get("type", "NPC")  # Fallback to generic NPC if type is missing
-            npc_class = globals().get(npc_type, NPC)  # Get the class dynamically
-            npc = npc_class(
+            npc = NPC(
                 self.game,
                 path=npc_info.get("path", ""),
                 pos=tuple(npc_info.get("position", (0, 0))),
@@ -93,7 +105,9 @@ class save_state:
                 point_value=npc_info.get("point_value", 10),
                 health_value=npc_info.get("health_value", 0),
                 attack_damage=npc_info.get("attack_damage", 10),
+                health=npc_info.get("health", 100),
             )
-            npc.health = npc_info.get("health", npc.health)  # Set initial health
+            # Set any additional data from the JSON (like health) if needed
+            npc.health = npc_info.get("health", npc.health)
             npc_list.append(npc)
         return npc_list
