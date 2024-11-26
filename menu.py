@@ -1,6 +1,7 @@
 import pygame
 import sys
 from settings import *
+from save_state import *
 
 class Menu:
     def __init__(self, game):
@@ -70,6 +71,11 @@ class Menu:
                     for button in self.buttons:
                         if button["rect"].collidepoint(event.pos):
                             button["action"]()
+
+    def load_game(self):
+        state_saver = save_state(self.game)
+        state_saver.load_game_state()
+        state_saver.apply_loaded_game_state()
 
     def run(self):
         while self.running:
