@@ -16,6 +16,7 @@ class Sound:
         self.player_pain = pg.mixer.Sound(self.path + 'player-death.mp3')
         self.health_pickup = pg.mixer.Sound(self.path + 'health-pickup.mp3')
         self.level_win = pg.mixer.Sound(self.path + 'level-win.mp3')
+        self.menu_music = pg.mixer.Sound(self.path + 'MenuMusic.mp3')
 
 
         if (self.theme == "Thanksgiving"):
