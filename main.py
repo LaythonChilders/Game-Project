@@ -12,6 +12,7 @@ from pause_menu import *
 from weapon import *
 from sound import *
 from pathfinding import *
+from score_system import *
 
 # Factories and singleton TO IMPLEMENT
 class CatDoom:
@@ -29,9 +30,8 @@ class CatDoom:
 
     def new_game(self):
         self.map = Map(self)
+        self.score_system = Score_system(self)
         self.player = Player(self)
-        #self.static_sprite = SpriteObject(self)
-        #self.animated_sprite = AnimatedSprite(self)
         self.menu = Menu(self)
         self.pause_menu = pause_menu(self)
         self.weapon = Weapon(self)
@@ -49,18 +49,13 @@ class CatDoom:
         self.raycasting.update()
         self.object_handler.update()
         self.weapon.update()
-        #self.static_sprite.update()
-        #self.animated_sprite.update()
         pygame.display.flip()
         self.delta_time = self.clock.tick(FPS)
         pygame.display.set_caption(f'{self.clock.get_fps() : .1f}')
 
     def draw(self):
-       # self.screen.fill('black')
         self.object_renderer.draw()
         self.weapon.draw()
-        #self.map.draw()
-        #self.player.draw()
 
     def check_events(self):
         self.global_trigger = False
@@ -72,7 +67,6 @@ class CatDoom:
                 self.global_trigger = True
 
             elif (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE): #if user presses escape show pause menu
-                self.pause_menu.running = True
                 pygame.mouse.set_visible(True)
                 self.pause_menu.run()
                 pygame.mouse.set_visible(False)

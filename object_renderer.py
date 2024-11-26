@@ -31,18 +31,18 @@ class ObjectRenderer:
         keys = list(string.ascii_uppercase) + [":"]  # A-Z + :
         self.letters = dict(zip(keys, self.letter_images))
         
-        ##dict for scoreboard
-        self.scoreboard_digit_size= 35
-        self.scoreboard_digit_images = [self.get_texture(f'Resources/Textures/Digits/{i}.png', [self.scoreboard_digit_size] * 2)
+        ##dict for score_board
+        self.score_system_digit_size= 35
+        self.score_system_digit_images = [self.get_texture(f'Resources/Textures/Digits/{i}.png', [self.score_system_digit_size] * 2)
                              for i in range(11)]
-        self.scoreboard_digits = dict(zip(map(str, range(11)), self.scoreboard_digit_images))
+        self.score_system_digits = dict(zip(map(str, range(11)), self.score_system_digit_images))
         
-        self.scoreboard_letter_size= 35
-        self.scoreboard_letter_images = [self.get_texture(f'Resources/Textures/Letters/{char}.png', [self.scoreboard_letter_size] * 2)
+        self.score_system_letter_size= 35
+        self.score_system_letter_images = [self.get_texture(f'Resources/Textures/Letters/{char}.png', [self.score_system_letter_size] * 2)
                       for char in string.ascii_uppercase]
-        self.scoreboard_letter_images.append(self.get_texture(f'Resources/Textures/Letters/colon.png', [self.scoreboard_letter_size] * 2))
+        self.score_system_letter_images.append(self.get_texture(f'Resources/Textures/Letters/colon.png', [self.score_system_letter_size] * 2))
         keys = list(string.ascii_uppercase) + [":"]  # A-Z + :
-        self.scoreboard_letters = dict(zip(keys, self.scoreboard_letter_images))
+        self.score_system_letters = dict(zip(keys, self.score_system_letter_images))
 
         self.character_health_images = self.load_character_health_images()
 
@@ -51,7 +51,6 @@ class ObjectRenderer:
         self.render_game_objects()
         self.draw_player_health()
         self.draw_player_score()
-        #self.draw_scoreboard()
         self.show_character_health()
 
     def game_over(self):
@@ -91,7 +90,7 @@ class ObjectRenderer:
         return health_images
 
     def draw_player_score(self):
-        score = str(self.game.player.score)
+        score = str(self.game.score_system.current_score)
         text_width = self.letter_size * 6
         total_score_width = text_width + len(score) * self.digit_size
         start_x = WIDTH - total_score_width
@@ -107,7 +106,6 @@ class ObjectRenderer:
         digit_start_x = start_x + text_width  
         for i, char in enumerate(score):
             self.screen.blit(self.digits[char], (digit_start_x + i * self.digit_size, 0))
-
 
     def player_damage(self):
         self.screen.blit(self.blood_screen, (0, 0))
@@ -155,12 +153,12 @@ class ObjectRenderer:
                 5: self.get_texture('Resources/Textures/thanksgivingwall.png'),
             }
     
-    def draw_scoreboard(self):
-        scores = self.player.scoreboard.get_scores()
+    def draw_top_scores(self):
+        scores = self.game.score_system.top_scores
 
         start_x = HALF_WIDTH - 500 
         start_y = HEIGHT // 3 * 2
-        row_height = self.scoreboard_letter_size + 20  #
+        row_height = self.score_system_letter_size + 20  #
         column_offset = WIDTH // 2
         
         for index, score_entry in enumerate(scores):
@@ -172,56 +170,58 @@ class ObjectRenderer:
             y = start_y + row * row_height
 
             if index == 9:
-                x -= self.scoreboard_digit_size 
+                x -= self.score_system_digit_size 
            
             rank = str(index + 1)
             for i, char in enumerate(rank):
-                self.screen.blit(self.scoreboard_digits[char], (x + i * self.scoreboard_digit_size, y))
+                self.screen.blit(self.score_system_digits[char], (x + i * self.score_system_digit_size, y))
 
             
-            initials_x = x + len(rank) * self.scoreboard_digit_size + self.scoreboard_letter_size
+            initials_x = x + len(rank) * self.score_system_digit_size + self.score_system_letter_size
             for i, char in enumerate(score_entry["initials"]):
-                self.screen.blit(self.scoreboard_letters[char.upper()], (initials_x + i * self.scoreboard_letter_size, y))
+                self.screen.blit(self.score_system_letters[char.upper()], (initials_x + i * self.score_system_letter_size, y))
 
             
             score_str = str(score_entry["score"])
-            score_x = initials_x + len(score_entry["initials"]) * self.scoreboard_letter_size + self.scoreboard_letter_size
+            score_x = initials_x + len(score_entry["initials"]) * self.score_system_letter_size + self.score_system_letter_size
             for i, char in enumerate(score_str):
-                self.screen.blit(self.scoreboard_digits[char], (score_x + i * self.scoreboard_digit_size, y))
+                self.screen.blit(self.score_system_digits[char], (score_x + i * self.score_system_digit_size, y))
 
-    def draw_scoreboard_enter_data(self, initials="ZZZ", highlight_index=None):
+    def draw_score_system_enter_data(self, initials, highlight_index=None):
         max_initials = 3
         button_size = 50
         spacing = 10
         start_x = (WIDTH - (button_size + spacing) * 13) // 2
         start_y = HEIGHT - 180
 
-        initials_area_height = button_size + spacing + 10  
+        initials_area_height = button_size + spacing + 10
         initials_area_rect = pg.Rect(0, start_y - initials_area_height, WIDTH, initials_area_height)
         pg.draw.rect(self.screen, (0, 0, 0), initials_area_rect)
 
-        
+        # Draw letter buttons
         for i, char in enumerate(string.ascii_uppercase):
             col = i % 13
             row = i // 13
             x = start_x + col * (button_size + spacing)
             y = start_y + row * (button_size + spacing)
 
-            color = (255, 255, 255) 
+            color = (255, 255, 255)
             if highlight_index is not None and i == highlight_index:
-                color = (255, 0, 0) 
+                color = (255, 0, 0)
 
             pg.draw.rect(self.screen, color, (x, y, button_size, button_size), border_radius=5)
 
             letter_image = self.get_texture(f'Resources/Textures/Letters/{char}.png', (button_size, button_size))
             self.screen.blit(letter_image, (x, y))
 
+        # Draw entered initials
         initials_x = WIDTH // 2 - (button_size + spacing) * len(initials) // 2
         initials_y = start_y - button_size - spacing
         for i, char in enumerate(initials):
             letter_image = self.get_texture(f'Resources/Textures/Letters/{char}.png', (button_size, button_size))
             self.screen.blit(letter_image, (initials_x + i * (button_size + spacing), initials_y))
 
+        # Draw "Enter" button
         enter_x = WIDTH // 2 - button_size
         enter_y = start_y + 2 * (button_size + spacing)
         button_color = (0, 255, 0) if len(initials) == max_initials else (100, 100, 100)
@@ -230,3 +230,14 @@ class ObjectRenderer:
         font = pg.font.Font(None, 36)
         enter_text = font.render("Enter", True, (0, 0, 0))
         self.screen.blit(enter_text, (enter_x + 15, enter_y + 10))
+
+        # Draw "Skip" button
+        skip_x = WIDTH // 2 - button_size * 4
+        skip_y = enter_y
+        skip_rect = pg.Rect(skip_x, skip_y, button_size * 2, button_size)
+        pg.draw.rect(self.screen, (255, 0, 0), skip_rect, border_radius=5)
+
+        skip_text = font.render("Skip", True, (255, 255, 255))
+        self.screen.blit(skip_text, (skip_x + 15, skip_y + 10))
+
+        return skip_rect, pg.Rect(enter_x, enter_y, button_size * 2, button_size)

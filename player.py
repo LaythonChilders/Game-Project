@@ -1,61 +1,51 @@
 from settings import *
 import pygame as pygame
 import math
-from scoreboard import *
-
 
 class Player:
     def __init__ (self, catGame):
-        self.catGame = catGame
-        self.x, self.y = PLAYER_POS
-        self.angle = PLAYER_ANGLE
-        self.shot = False
-        self.health = PLAYER_MAX_HEALTH
-        self.score = 0
-        self.scoreboard = Scoreboard(self)
+        self._catgame = catGame
+        self._x, self._y = PLAYER_POS
+        self._angle = PLAYER_ANGLE
+        self._shot = False
+        self._health = PLAYER_MAX_HEALTH
 
     def check_game_over(self):
-        if self.health < 1:
-            self.catGame.object_renderer.game_over()
+        if self._health < 1:
+            self._catgame.object_renderer.game_over()
             pygame.display.flip()
             pygame.time.delay(1500)
             
-            self.catGame.pause_menu.running = True
             pygame.mouse.set_visible(True)
-            self.catGame.pause_menu.death()
+            self._catgame.score_system.enter_new_score()
             pygame.mouse.set_visible(False)
-
-            #self.scoreboard.add_score("LTC", self.score)
-            print(self.scoreboard.get_scores())
             
-            self.catGame.restart_level()
+            self._catgame.restart_level()
 
-
-
-    def get_damage(self, damage):
-        self.health -= damage
-        self.catGame.object_renderer.player_damage()
-        self.catGame.sound.player_pain.play()
+    def take_damage(self, damage):
+        self._health -= damage
+        self._catgame.object_renderer.player_damage()
+        self._catgame.sound.player_pain.play()
         self.check_game_over()
 
     def add_health(self, health_value):
-        if self.health < PLAYER_MAX_HEALTH:
-            self.health = min(self.health + health_value, PLAYER_MAX_HEALTH)
-            self.catGame.sound.health_pickup.play()
+        if self._health < PLAYER_MAX_HEALTH:
+            self._health = min(self._health + health_value, PLAYER_MAX_HEALTH)
+            self._catgame.sound.health_pickup.play()
 
     def single_fire_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if event.button == 1 and not self.shot and not self.catGame.weapon.reloading:
-                self.catGame.sound.shotgun.play()
-                self.catGame.sound.reload.play()
-                self.shot = True
-                self.catGame.weapon.reloading = True
+            if event.button == 1 and not self._shot and not self._catgame.weapon.reloading:
+                self._catgame.sound.shotgun.play()
+                self._catgame.sound.reload.play()
+                self._shot = True
+                self._catgame.weapon.reloading = True
 
     def move(self):
-        sin_a = math.sin(self.angle)
-        cos_a = math.cos(self.angle)
+        sin_a = math.sin(self._angle)
+        cos_a = math.cos(self._angle)
         dx, dy = 0, 0
-        speed = PLAYER_SPEED * self.catGame.delta_time
+        speed = PLAYER_SPEED * self._catgame.delta_time
         speed_sin = speed * sin_a
         speed_cos = speed * cos_a
 
@@ -77,27 +67,27 @@ class Player:
         self.check_wall_collison(dx, dy)
 
     #    if keys[pygame.K_LEFT]:
-    #        self.angle -= PLAYER_ROT_SPEED * self.catGame.delta_time
+    #        self._angle -= PLAYER_ROT_SPEED * self._catgame.delta_time
     #    if keys[pygame.K_RIGHT]:
-    #        self.angle += PLAYER_ROT_SPEED * self.catGame.delta_time
-        self.angle %= math.tau
+    #        self._angle += PLAYER_ROT_SPEED * self._catgame.delta_time
+        self._angle %= math.tau
 
     def check_wall(self, x, y):
-        return (x, y) not in self.catGame.map.world_map
+        return (x, y) not in self._catgame.map.world_map
     
     def check_wall_collison(self, dx, dy):
         # value used to maintain resolution of wall textures 
-        SCALE = PLAYER_SIZE_SCALE / self.catGame.delta_time
-        if self.check_wall(int(self.x + dx * SCALE), int(self.y)):
-            self.x += dx
-        if self.check_wall(int(self.x), int(self.y + dy * SCALE)):
-            self.y += dy
+        SCALE = PLAYER_SIZE_SCALE / self._catgame.delta_time
+        if self.check_wall(int(self._x + dx * SCALE), int(self._y)):
+            self._x += dx
+        if self.check_wall(int(self._x), int(self._y + dy * SCALE)):
+            self._y += dy
 
     def draw(self):
-        pygame.draw.line(self.catGame.screen, 'yellow', (self.x * 100, self.y * 100),
-                    (self.x * 100 + WIDTH * math.cos(self.angle),
-                     self.y * 100 + WIDTH * math. sin(self.angle)), 2)
-        pygame.draw.circle(self.catGame.screen, 'green', (self.x * 100, self.y * 100), 15)
+        pygame.draw.line(self._catgame.screen, 'yellow', (self._x * 100, self._y * 100),
+                    (self._x * 100 + WIDTH * math.cos(self._angle),
+                     self._y * 100 + WIDTH * math. sin(self._angle)), 2)
+        pygame.draw.circle(self._catgame.screen, 'green', (self._x * 100, self._y * 100), 15)
 
     def mouse_control(self):
         mx, my = pygame.mouse.get_pos()
@@ -106,7 +96,7 @@ class Player:
 
         self.rel = pygame.mouse.get_rel()[0]
         self.rel = max(-MOUSE_MAX_REL, min(MOUSE_MAX_REL, self.rel))
-        self.angle += self.rel * MOUSE_SENSITIVITY * self.catGame.delta_time
+        self._angle += self.rel * MOUSE_SENSITIVITY * self._catgame.delta_time
 
     def update(self):
         self.move()
@@ -114,7 +104,32 @@ class Player:
 
     @property
     def pos(self):
-        return self.x, self.y
+        return self._x, self._y
+    
     @property
     def map_pos(self):
-        return int(self.x), int(self.y)
+        return int(self._x), int(self._y)
+    
+    @property
+    def angle(self):
+        return self._angle
+    
+    @property
+    def x(self):
+        return self._x
+    
+    @property
+    def y(self):
+        return self._y
+    
+    @property
+    def health(self):
+        return self._health
+    
+    @property
+    def shot(self):
+        return self._shot
+    
+    @shot.setter
+    def shot(self, value):
+        self._shot = value

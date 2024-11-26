@@ -79,7 +79,7 @@ class ObjectHandler():
             self.game.object_renderer.game_over()
             mouse.set_visible(True)
             self.game.sound.level_win.play()
-            self.game.pause_menu.death()
+            self.game.game.score_system.enter_new_score()
             mouse.set_visible(False)
             self.game.pause_menu.exit_to_menu() 
 

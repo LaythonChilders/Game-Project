@@ -45,8 +45,7 @@ class NPC(AnimatedSprite):
         if not self.alive and not self.health_granted and self.player.health < 100 and self.health_value != 0:
             if self.dist < 1.0: 
                 self.game.player.add_health(self.health_value)
-                self.health_granted = True
-                 
+                self.health_granted = True              
 
     def update(self):
         self.check_animation_time()
@@ -80,7 +79,7 @@ class NPC(AnimatedSprite):
             self.game.sound.npc_shot.play()
             if random() < self.accuracy:
                 pass
-                self.game.player.get_damage(self.attack_damage)
+                self.game.player.take_damage(self.attack_damage)
 
     def animate_death(self):
         if not self.alive:
@@ -107,7 +106,7 @@ class NPC(AnimatedSprite):
         if self.health < 1:
             self.alive = False
             self.game.sound.npc_death.play()
-            self.game.player.score += self.value
+            self.game.score_system.add_points(self.value)
             self.game.object_handler.npc_count = self.game.object_handler.npc_count - 1
 
     def run_logic(self):
