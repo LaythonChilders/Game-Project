@@ -47,6 +47,16 @@ class Menu:
                 ),
                 "action": lambda: self.set_theme("Thanksgiving"),
             },
+            {
+                "text": "Load Game",
+                "rect": pygame.Rect(
+                    HALF_WIDTH - button_width // 2,
+                    HALF_HEIGHT + 2 * (button_height + button_margin) + button_margin,
+                    button_width,
+                    button_height,
+                ),
+                "action": self.load_game,
+            },
         ]
 
     def set_theme(self, theme):
@@ -76,6 +86,7 @@ class Menu:
         state_saver = save_state(self.game)
         state_saver.load_game_state()
         state_saver.apply_loaded_game_state()
+        self.running = False  # Exit the menu after loading the game
 
     def run(self):
         while self.running:
@@ -83,6 +94,6 @@ class Menu:
             self.draw_buttons()
             pygame.display.flip()
             self.clock.tick(FPS)
-            pygame.display.set_caption(f'{self.clock.get_fps() : .1f}')
+            pygame.display.set_caption(f'{self.clock.get_fps(): .1f}')
 
         return self.selected_theme

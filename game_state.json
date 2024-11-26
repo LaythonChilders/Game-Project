@@ -1,9 +1,9 @@
 {
     "player": {
-        "health": 80,
+        "health": 40,
         "position": [
-            12,
-            6
+            8,
+            1
         ]
     },
     "score": 10,
@@ -13,7 +13,7 @@
             "type": "ZombieNPC",
             "position": [
                 11,
-                16
+                19
             ],
             "health": 100,
             "path": "Resources/Sprites/NPC/Zombie",
@@ -27,8 +27,8 @@
         {
             "type": "ZombieNPC",
             "position": [
-                11,
-                5
+                9,
+                3
             ],
             "health": 100,
             "path": "Resources/Sprites/NPC/Zombie",
@@ -42,7 +42,7 @@
         {
             "type": "ZombieNPC",
             "position": [
-                11,
+                10,
                 6
             ],
             "health": 0,
