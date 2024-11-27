@@ -1,134 +1,254 @@
 {
     "player": {
-        "health": 90,
+        "health": 82,
         "position": [
-            8,
-            6
+            1,
+            29
         ],
-        "angle": 0.5635499999999937
+        "angle": 6.166050000000005
     },
-    "score": 40,
-    "theme": "Halloween",
-    "npc_count": 4,
+    "score": 30,
+    "theme": "Thanksgiving",
+    "npc_count": 13,
     "npcs": [
         {
-            "type": "NPC",
+            "type": "TurkeyNPC",
             "position": [
-                11,
-                17
+                5,
+                28
             ],
-            "health": 0,
-            "path": "Resources/Sprites/NPC/Zombie/0.png",
+            "health": 50,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
             "scale": 0.6,
             "shift": 0.38,
             "animation_time": 180,
             "point_value": 10,
-            "health_value": 0,
+            "health_value": 2,
             "attack_damage": 10
         },
         {
-            "type": "NPC",
-            "position": [
-                6,
-                6
-            ],
-            "health": 0,
-            "path": "Resources/Sprites/NPC/Zombie/0.png",
-            "scale": 0.6,
-            "shift": 0.38,
-            "animation_time": 180,
-            "point_value": 10,
-            "health_value": 0,
-            "attack_damage": 10
-        },
-        {
-            "type": "NPC",
-            "position": [
-                10,
-                6
-            ],
-            "health": 0,
-            "path": "Resources/Sprites/NPC/Zombie/0.png",
-            "scale": 0.6,
-            "shift": 0.38,
-            "animation_time": 180,
-            "point_value": 10,
-            "health_value": 0,
-            "attack_damage": 10
-        },
-        {
-            "type": "NPC",
+            "type": "TurkeyNPC",
             "position": [
                 4,
-                18
+                27
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                8,
+                6
             ],
             "health": 0,
-            "path": "Resources/Sprites/NPC/Zombie/0.png",
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
             "scale": 0.6,
             "shift": 0.38,
             "animation_time": 180,
             "point_value": 10,
-            "health_value": 0,
+            "health_value": 2,
             "attack_damage": 10
         },
         {
-            "type": "NPC",
+            "type": "TurkeyNPC",
+            "position": [
+                6,
+                29
+            ],
+            "health": 50,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                5,
+                27
+            ],
+            "health": 0,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                6,
+                28
+            ],
+            "health": 0,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                6,
+                28
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                7,
+                29
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                11,
+                19
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                11,
+                4
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                13,
+                6
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                2,
+                20
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                4,
+                30
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                5,
+                16
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
+            "position": [
+                5,
+                18
+            ],
+            "health": 100,
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
+            "scale": 0.6,
+            "shift": 0.38,
+            "animation_time": 180,
+            "point_value": 10,
+            "health_value": 2,
+            "attack_damage": 10
+        },
+        {
+            "type": "TurkeyNPC",
             "position": [
                 10,
-                11
+                26
             ],
             "health": 100,
-            "path": "Resources/Sprites/NPC/Zombie/0.png",
+            "path": "Resources/Sprites/NPC/Turkey/0.png",
             "scale": 0.6,
             "shift": 0.38,
             "animation_time": 180,
             "point_value": 10,
-            "health_value": 0,
-            "attack_damage": 10
-        },
-        {
-            "type": "NPC",
-            "position": [
-                10,
-                8
-            ],
-            "health": 100,
-            "path": "Resources/Sprites/NPC/Zombie/0.png",
-            "scale": 0.6,
-            "shift": 0.38,
-            "animation_time": 180,
-            "point_value": 10,
-            "health_value": 0,
-            "attack_damage": 10
-        },
-        {
-            "type": "NPC",
-            "position": [
-                10,
-                9
-            ],
-            "health": 100,
-            "path": "Resources/Sprites/NPC/Zombie/0.png",
-            "scale": 0.6,
-            "shift": 0.38,
-            "animation_time": 180,
-            "point_value": 10,
-            "health_value": 0,
-            "attack_damage": 10
-        },
-        {
-            "type": "NPC",
-            "position": [
-                14,
-                25
-            ],
-            "health": 100,
-            "path": "Resources/Sprites/NPC/Zombie/0.png",
-            "scale": 0.6,
-            "shift": 0.38,
-            "animation_time": 180,
-            "point_value": 10,
-            "health_value": 0,
+            "health_value": 2,
             "attack_damage": 10
         }
     ]

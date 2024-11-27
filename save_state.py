@@ -78,7 +78,6 @@ class save_state:
         # Restore score and theme
         self.game.score_system.current_score = self.loaded_data.get("score", 0)
         self.game.theme = self.loaded_data.get("theme", "default_theme")
-        print(f"{self.game.theme} + Test")
 
         # Restore NPC data
         npc_data = self.loaded_data.get("npcs", [])

@@ -162,12 +162,10 @@ class NPC(AnimatedSprite):
         x_map, y_map = self.game.player.map_pos
 
         texture_vert, texture_hor = 1,1
-        
-        if self.theta == 0:
-            dx = self.x - self.player.x
-            dy = self.y - self.player.y
-            self.dx, self.dy = dx, dy
-            self.theta = math.atan2(dy, dx)
+
+        if(self.theta == 0):
+            return False
+
 
         ray_angle = self.theta
 
