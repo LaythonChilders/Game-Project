@@ -26,6 +26,8 @@ class CatDoom:
         self.global_event = pygame.USEREVENT + 0
         pygame.time.set_timer(self.global_event, 40)
         self.state_saver = save_state(self)
+        self.sound = Sound(self)
+        self.theme = None
 
     def new_game(self):
         self.map = Map(self)
@@ -41,13 +43,13 @@ class CatDoom:
         self.object_handler = ObjectHandler(self)
         self.object_renderer = ObjectRenderer(self)
         self.raycasting = Raycasting(self)
-        self.sound = Sound(self)
+        self.sound.init_theme_sounds(theme=self.theme)
 
     def load_save_theme_dependent(self, npc_list, npc_amt):
         self.object_handler = ObjectHandler(self, npc_list, npc_sum = npc_amt)
         self.object_renderer = ObjectRenderer(self)
         self.raycasting = Raycasting(self)
-        self.sound = Sound(self)
+        self.sound.init_theme_sounds(theme=self.theme)
 
     def draw_frame(self): #called in loop to update/redraw each frame
         self.player.update()

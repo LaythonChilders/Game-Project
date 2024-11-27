@@ -90,6 +90,7 @@ class Menu:
 
     def run(self):
         pygame.mouse.set_visible(True)
+        self.game.sound.menu_music.play(loops = -1)
         while self.running:
             self.handle_events()
             self.draw_buttons()
@@ -98,4 +99,5 @@ class Menu:
             pygame.display.set_caption(f'{self.clock.get_fps(): .1f}')
 
         pygame.mouse.set_visible(False)
+        pygame.mixer.stop()
 

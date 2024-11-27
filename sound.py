@@ -3,7 +3,6 @@ import pygame as pg
 class Sound:
     def __init__(self, game):
         self.game = game
-        self.theme = self.game.theme
 
         if pg.mixer.get_init():
             pg.mixer.quit()
@@ -19,14 +18,16 @@ class Sound:
         self.menu_music = pg.mixer.Sound(self.path + 'MenuMusic.mp3')
 
 
-        if (self.theme == "Thanksgiving"):
+    def init_theme_sounds(self, theme):
+
+        if (theme == "Thanksgiving"):
             self.npc_death = pg.mixer.Sound(self.path + 'turkey-death.mp3')
             self.npc_shot = pg.mixer.Sound(self.path + 'turkey-pain.mp3')
 
-        elif (self.theme == "Halloween"):
+        elif (theme == "Halloween"):
             self.npc_death = pg.mixer.Sound(self.path + 'zombie-death.mp3')
             self.npc_shot = pg.mixer.Sound(self.path + 'zombie-bite.mp3')
 
-        elif (self.theme == "Christmas"):
+        elif (theme == "Christmas"):
             self.npc_death = pg.mixer.Sound(self.path + 'slime-death.mp3')
             self.npc_shot = pg.mixer.Sound(self.path + 'slime-hurt.mp3')
