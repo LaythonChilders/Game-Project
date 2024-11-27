@@ -52,10 +52,13 @@ class pause_menu:
         sys.exit()
 
     def save_game(self):
-        # Save the game state using the `save_state` class
         state_saver = save_state(self.game)
         state_saver.get_game_state()
         state_saver.save_game_state()
+
+        self.game.running = False
+        self.running = False
+        self.game.setup_game()
 
     def draw_nav_buttons(self):
         for button in self.buttons:
